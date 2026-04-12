@@ -364,6 +364,36 @@
   .st-cancelled   { background:rgba(196,74,74,.15); color:#e08080; border:1px solid #6a2020; }
   .cal-empty { text-align:center; padding:60px 20px; color:var(--text-muted); font-style:italic; font-size:.9rem; }
   .cal-tourn.finished { opacity:.6; border-left-color:var(--text-muted) !important; background:rgba(60,70,80,.1) !important; }
+
+  /* ── GAME REVIEW CARDS ── */
+  .rv-wrap { padding:12px 16px 40px; }
+  .rv-section-hdr { display:flex; align-items:center; gap:10px; margin:18px 0 8px; padding:9px 14px; background:var(--bg-panel); border-radius:6px; font-family:'Cinzel',serif; font-size:.78rem; letter-spacing:.12em; font-weight:700; text-transform:uppercase; color:var(--text-main); border-left:3px solid var(--gold-dim); }
+  .rv-card { background:var(--bg-card); border:1px solid var(--border); border-radius:8px; margin:8px 0; overflow:hidden; }
+  .rv-card-header { display:flex; align-items:center; gap:12px; padding:11px 15px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
+  .rv-rank-badge { min-width:54px; text-align:center; padding:6px 10px; border-radius:6px; font-weight:700; font-size:.9rem; color:#fff; font-family:'Cinzel',serif; letter-spacing:.04em; flex-shrink:0; }
+  .rv-badge-gold   { background:#b8860b; }
+  .rv-badge-silver { background:#708090; }
+  .rv-badge-bronze { background:#8b4513; }
+  .rv-badge-teal   { background:#0d6e6e; }
+  .rv-badge-indigo { background:#1a4a7c; }
+  .rv-badge-slate  { background:#3d5166; }
+  .rv-badge-purple { background:#7030a0; }
+  .rv-player-name { font-weight:700; font-size:1.05rem; flex:1; color:var(--text-main); min-width:120px; }
+  .rv-champ-badge { background:rgba(184,134,11,.18); color:var(--gold-light); border:1px solid var(--gold-dim); font-family:'Cinzel',serif; font-size:.58rem; padding:2px 8px; border-radius:10px; font-weight:700; letter-spacing:.07em; white-space:nowrap; }
+  .rv-rating-label { font-size:.78rem; color:var(--text-dim); white-space:nowrap; }
+  .rv-stats-row { display:flex; flex-wrap:wrap; border-bottom:1px solid var(--border); }
+  .rv-stat { flex:1; min-width:80px; padding:8px 10px; text-align:center; border-right:1px solid var(--border); }
+  .rv-stat:last-child { border-right:none; }
+  .rv-stat-label { font-family:'Cinzel',serif; font-size:.55rem; color:var(--text-muted); letter-spacing:.07em; text-transform:uppercase; }
+  .rv-stat-val { font-size:.95rem; font-weight:700; color:var(--text-main); margin-top:2px; }
+  .rv-trend-up  { color:#4caf50; }
+  .rv-trend-dn  { color:var(--red); }
+  .rv-trend-new { color:var(--accent-holdem); }
+  .rv-narrative { padding:11px 15px; font-size:.88rem; color:var(--text-dim); line-height:1.65; background:var(--bg-panel); font-style:italic; }
+  .rv-no-data  { text-align:center; padding:60px 20px; color:var(--text-muted); font-style:italic; }
+  .rv-loading  { text-align:center; padding:40px 20px; color:var(--text-dim); font-style:italic; }
+  .rv-updated  { text-align:right; padding:4px 16px 0; font-size:.7rem; color:var(--text-muted); font-style:italic; }
+  @media(max-width:480px) { .rv-stat { min-width:68px; } }
 </style>
 </head>
 <body>
@@ -405,6 +435,7 @@
   <button class="tab-btn" id="tab-hvo" onclick="switchTab('hvo')">♠♦ HOLDEM vs OMAHA</button>
   <button class="tab-btn" id="tab-calendar" onclick="switchTab('calendar')">📅 CALENDAR</button>
   <button class="tab-btn active" id="tab-results"  onclick="switchTab('results')">🏆 RESULTS</button>
+  <button class="tab-btn"        id="tab-gamereview" onclick="switchTab('gamereview')">🎖 GAME REVIEW</button>
 </div>
 
 <!-- LEADERBOARD CONTROLS (hidden on other tabs) -->
@@ -656,6 +687,13 @@
   </div>
 </div><!-- end section-results -->
 
+<!-- ══ GAME REVIEW SECTION ══ -->
+<div id="section-gamereview" style="display:none">
+  <div id="gamereview-content">
+    <!-- populated by loadReview() / renderReview() -->
+  </div>
+</div><!-- end section-gamereview -->
+
 <footer>
   <span class="fr">⟡ ᚾ ᚩ ᚱ ᛞ ᛁ ᚳ ⟡</span>
   Nordic Warriors Poker League &nbsp;·&nbsp; Live data from Google Sheets
@@ -686,6 +724,10 @@ var activeTab     = 'results';
 var activePeriod  = 'Overall';
 var refreshTimer, countdownTimer, nextAt;
 var statsLoaded   = false; // lazy-loaded when Leaders or HvO tab clicked
+var REVIEW_DATA   = null;
+var reviewLoaded  = false; // lazy-loaded when Game Review tab clicked
+var LS_REVIEW     = 'nw_review_v5';
+var LS_REVIEW_GEN = 'nw_review_gen_v5';
 
 // Leaderboard sort/search
 var sortState   = { holdem:{col:'rank',asc:true}, omaha:{col:'rank',asc:true}, overall:{col:'rank',asc:true} };
@@ -722,7 +764,14 @@ function rLabel(rank){ return rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':ra
 
 // ── LOAD (cache-first) ────────────────────────────────────────
 function loadData(force) {
-  if (force) { fetchFresh(false); return; }
+  if (force) {
+    // Clear review cache so it re-fetches on next tab visit
+    try { localStorage.removeItem(LS_REVIEW); localStorage.removeItem(LS_REVIEW_GEN); } catch(e) {}
+    REVIEW_DATA  = null;
+    reviewLoaded = false;
+    fetchFresh(false);
+    return;
+  }
   // Try localStorage first — reveal instantly, then background refresh
   try {
     var cached    = localStorage.getItem(LS_DATA);
@@ -908,16 +957,17 @@ function showError(msg) {
 // ── TAB SWITCHING ─────────────────────────────────────────────
 function switchTab(tab) {
   activeTab = tab;
-  ['leaderboard','leaders','hvo','calendar','results'].forEach(function(t) {
+  ['leaderboard','leaders','hvo','calendar','results','gamereview'].forEach(function(t) {
     document.getElementById('tab-' + t).classList.toggle('active', t === tab);
     document.getElementById('section-' + t).style.display = (t === tab) ? '' : 'none';
   });
   document.getElementById('ctrl-leaderboard').style.display = tab === 'leaderboard' ? '' : 'none';
   document.getElementById('period-bar').style.display = (tab === 'leaders' || tab === 'hvo') ? '' : 'none';
-  if (tab === 'leaders')  { ensureStats(renderLeadersTab); }
-  if (tab === 'hvo')      { ensureStats(renderHvoTab); }
-  if (tab === 'calendar') renderCalTab();
-  if (tab === 'results')  renderLatestGame();
+  if (tab === 'leaders')    { ensureStats(renderLeadersTab); }
+  if (tab === 'hvo')        { ensureStats(renderHvoTab); }
+  if (tab === 'calendar')   renderCalTab();
+  if (tab === 'results')    renderLatestGame();
+  if (tab === 'gamereview') { if (!reviewLoaded) loadReview(); }
 }
 
 // ── PERIOD BAR ────────────────────────────────────────────────
@@ -1353,6 +1403,172 @@ function rmi(icon, label, val, sub) {
     '<div class="rmi-label">' + label + '</div>' +
     '<div class="rmi-value">' + esc(String(val)) + '</div>' +
     (sub ? '<div class="rmi-sub">' + esc(String(sub)) + '</div>' : '') +
+  '</div>';
+}
+
+// ── GAME REVIEW TAB ──────────────────────────────────────────
+function loadReview() {
+  var el = document.getElementById('gamereview-content');
+
+  // Try localStorage cache (30-min window)
+  try {
+    var gen = localStorage.getItem(LS_REVIEW_GEN);
+    var raw = localStorage.getItem(LS_REVIEW);
+    if (raw && gen && (Date.now() - parseInt(gen)) < 30 * 60 * 1000) {
+      REVIEW_DATA = JSON.parse(raw);
+      if (REVIEW_DATA && REVIEW_DATA.date) { renderReview(REVIEW_DATA); return; }
+    }
+  } catch(e) {}
+
+  el.innerHTML = '<div class="rv-loading">Loading review data…</div>';
+  fetch(WEBAPP_URL + '?get=review&_=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      REVIEW_DATA = data;
+      reviewLoaded = true;
+      try {
+        localStorage.setItem(LS_REVIEW,     JSON.stringify(data));
+        localStorage.setItem(LS_REVIEW_GEN, String(Date.now()));
+      } catch(e) {}
+      renderReview(data);
+    })
+    .catch(function(err) {
+      el.innerHTML = '<div class="rv-no-data">Could not load review data: ' + esc(String(err.message || err)) + '</div>';
+    });
+}
+
+function renderReview(data) {
+  var el = document.getElementById('gamereview-content');
+  if (!data || data.error || !data.date) {
+    el.innerHTML = '<div class="rv-no-data">' + esc((data && data.error) || 'No review data available.') + '</div>';
+    return;
+  }
+
+  var isHoldem  = data.game === 'holdem';
+  var gameIcon  = isHoldem ? '♠' : '◆';
+  var dateObj   = new Date(data.date + 'T12:00:00Z');
+  var dateLong  = dateObj.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  var dateShort = dateObj.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+  var dateYear  = dateObj.getUTCFullYear();
+  var qParts    = (data.quarter || '').split(' ');
+  var prizePool = data.fieldSize * BUY_IN;
+
+  var html = '<div class="rv-wrap">';
+
+  // Header banner (reuse results-header style)
+  html += '<div class="results-header">' +
+    '<div class="results-hdr-eyebrow">⚔ NORDIC WARRIORS POKER LEAGUE ⚔</div>' +
+    '<div class="results-hdr-title">' + gameIcon + ' ' + esc(data.gameLabel.toUpperCase()) + ' ' + gameIcon + '</div>' +
+    '<div class="results-hdr-detail">' + dateLong + ' &nbsp;·&nbsp; ' + esc(data.quarter) + '</div>' +
+  '</div>';
+
+  // Meta grid (reuse results-meta-grid style)
+  html += '<div class="results-meta-grid">' +
+    rmi('📅', 'DATE',     dateShort, String(dateYear)) +
+    rmi(gameIcon, 'GAME', isHoldem ? "NL Hold'em" : 'Omaha', isHoldem ? '' : 'Hi/Lo') +
+    rmi('👥', 'ENTRANTS', data.fieldSize, 'Players') +
+    rmi('📊', 'QUARTER',  qParts[0] || data.quarter, qParts[1] || '') +
+  '</div>';
+
+  // Prize bar (reuse results-prize-bar style)
+  html += '<div class="results-prize-bar">' +
+    '💰 Prize Pool: <strong>' + prizePool.toLocaleString() + '</strong> chips' +
+    ' (' + data.fieldSize + ' &times; ' + BUY_IN.toLocaleString() + ')' +
+    '<span class="results-prize-sep">|</span>' +
+    '💵 <strong>' + data.itmCount + '</strong> player' + (data.itmCount !== 1 ? 's' : '') + ' in the money' +
+  '</div>';
+
+  if (data.updated) {
+    var upd = new Date(data.updated);
+    html += '<div class="rv-updated">Review generated: ' + upd.toLocaleString() + '</div>';
+  }
+
+  // ITM / Podium section
+  if (data.itm && data.itm.length) {
+    html += '<div class="rv-section-hdr">🏆 &nbsp;PODIUM FINISHERS — IN THE MONEY</div>';
+    data.itm.forEach(function(p) { html += renderReviewCard(p, false, 0, data.quarter); });
+  }
+
+  // Bounty section
+  if (data.bountyTop && data.bountyTop.length) {
+    html += '<div class="rv-section-hdr">💣 &nbsp;TOP BOUNTY HUNTERS</div>';
+    data.bountyTop.forEach(function(p, idx) { html += renderReviewCard(p, true, idx, data.quarter); });
+  }
+
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderReviewCard(p, isBounty, bIdx, quarter) {
+  var rank  = p.rank || 0;
+  var sfx   = rank === 1 ? 'st' : rank === 2 ? 'nd' : rank === 3 ? 'rd' : 'th';
+  var rankLabel, badgeClass;
+
+  if (isBounty) {
+    rankLabel  = ['💣 1st', '💣 2nd', '💣 3rd'][bIdx] || '💣';
+    badgeClass = 'rv-badge-purple';
+  } else {
+    rankLabel  = rank === 1 ? '🥇 1st'
+               : rank === 2 ? '🥈 2nd'
+               : rank === 3 ? '🥉 3rd'
+               : rank === 4 ? '🎗 4th'
+               : rank === 5 ? '🎗 5th'
+               : rank + sfx;
+    badgeClass = rank === 1 ? 'rv-badge-gold'
+               : rank === 2 ? 'rv-badge-silver'
+               : rank === 3 ? 'rv-badge-bronze'
+               : rank === 4 ? 'rv-badge-teal'
+               : rank === 5 ? 'rv-badge-indigo'
+               : 'rv-badge-slate';
+  }
+
+  var cQ    = p.cQ   || {};
+  var rat   = p.rating || {};
+  var trend = p.trend  || '';
+  var trendClass = trend.indexOf('↑') >= 0 ? 'rv-trend-up'
+                 : trend.indexOf('↓') >= 0 ? 'rv-trend-dn'
+                 : (trend.indexOf('🆕') >= 0 || trend.indexOf('\uD83C\uDD95') >= 0) ? 'rv-trend-new'
+                 : '';
+
+  var html = '<div class="rv-card">';
+
+  // Card header
+  html += '<div class="rv-card-header">';
+  html += '<div class="rv-rank-badge ' + badgeClass + '">' + rankLabel + '</div>';
+  html += '<div class="rv-player-name">' + esc(p.player) + '</div>';
+  if (p.champQtrs > 0) html += '<div class="rv-champ-badge">🏆 ' + p.champQtrs + 'x CHAMPION</div>';
+  if (rat.label)       html += '<div class="rv-rating-label">' + esc(rat.label) + '</div>';
+  html += '</div>';
+
+  // Stats row
+  html += '<div class="rv-stats-row">';
+  if (isBounty) {
+    html += rvStat('BOUNTY', n(p.bounty || 0));
+    html += rvStat('CHIPS WON', p.chips > 0 ? n(p.chips) : '—');
+    html += rvStat(quarter + ' BOUNTIES', cQ.bounties || 0);
+    html += rvStat('QTR TOTAL', cQ.totalBounty > 0 ? n(Math.round(cQ.totalBounty)) : '—');
+    html += rvStat('TREND', '<span class="' + trendClass + '">' + esc(trend) + '</span>');
+  } else {
+    html += rvStat('PTS EARNED',  n(Math.round(p.pts || 0)));
+    html += rvStat('CHIPS WON',   p.chips > 0 ? n(p.chips) : '—');
+    html += rvStat(quarter + ' GAMES',  cQ.games || 0);
+    html += rvStat(quarter + ' CASHES', cQ.itm   || 0);
+    html += rvStat('QTR AVG PTS', cQ.games ? n(Math.round(cQ.avgPts)) : '—');
+    html += rvStat('TREND', '<span class="' + trendClass + '">' + esc(trend) + '</span>');
+  }
+  html += '</div>';
+
+  // Narrative
+  if (p.narrative) html += '<div class="rv-narrative">' + esc(p.narrative) + '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+function rvStat(label, val) {
+  return '<div class="rv-stat">' +
+    '<div class="rv-stat-label">' + esc(label) + '</div>' +
+    '<div class="rv-stat-val">'   + val         + '</div>' +
   '</div>';
 }
 
