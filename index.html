@@ -1415,23 +1415,37 @@ function rmi(icon, label, val, sub) {
 
 // ── GAME REVIEW TAB ──────────────────────────────────────────
 function loadReview() {
-  var el = document.getElementById('gamereview-content');
-
-  // Try localStorage cache (30-min window)
+  // Show cached data immediately (even if stale) then refresh in background —
+  // same pattern as primary/stats so the tab is never a blank spinner on repeat visits.
   try {
-    var gen = localStorage.getItem(LS_REVIEW_GEN);
     var raw = localStorage.getItem(LS_REVIEW);
-    if (raw && gen && (Date.now() - parseInt(gen)) < 30 * 60 * 1000) {
-      REVIEW_DATA = JSON.parse(raw);
-      if (REVIEW_DATA && REVIEW_DATA.date) { renderReview(REVIEW_DATA); return; }
+    var gen = localStorage.getItem(LS_REVIEW_GEN);
+    if (raw && gen) {
+      var parsed = JSON.parse(raw);
+      if (parsed && parsed.date) {
+        REVIEW_DATA  = parsed;
+        reviewLoaded = true;
+        renderReview(parsed);
+        // Refresh in background if cache is older than 30 minutes
+        if ((Date.now() - parseInt(gen)) >= REFRESH_MS) {
+          fetchReviewFromServer(true);
+        }
+        return;
+      }
     }
   } catch(e) {}
 
-  el.innerHTML = '<div class="rv-loading">Loading review data…</div>';
+  // No cache at all — show spinner and wait for first load
+  document.getElementById('gamereview-content').innerHTML =
+    '<div class="rv-loading">Loading review data…</div>';
+  fetchReviewFromServer(false);
+}
+
+function fetchReviewFromServer(isBackground) {
   fetch(WEBAPP_URL + '?get=review&_=' + Date.now())
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      REVIEW_DATA = data;
+      REVIEW_DATA  = data;
       reviewLoaded = true;
       try {
         localStorage.setItem(LS_REVIEW,     JSON.stringify(data));
@@ -1440,7 +1454,10 @@ function loadReview() {
       renderReview(data);
     })
     .catch(function(err) {
-      el.innerHTML = '<div class="rv-no-data">Could not load review data: ' + esc(String(err.message || err)) + '</div>';
+      if (!isBackground) {
+        document.getElementById('gamereview-content').innerHTML =
+          '<div class="rv-no-data">Could not load review data: ' + esc(String(err.message || err)) + '</div>';
+      }
     });
 }
 
