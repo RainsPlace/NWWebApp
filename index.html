@@ -46,6 +46,10 @@
   .live-dot { width:6px; height:6px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); animation:pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
   .updated-time { font-size:.7rem; color:var(--text-muted); margin-top:5px; font-style:italic; }
+  .header-avatar { position:absolute; top:50%; transform:translateY(-50%); width:180px; height:180px; border-radius:50%; border:2px solid var(--gold-dim); object-fit:cover; box-shadow:0 0 18px rgba(201,168,76,.25); }
+  .header-avatar-left  { left:28px; }
+  .header-avatar-right { right:28px; }
+  @media(max-width:700px){ .header-avatar { display:none; } }
 
   /* ── TAB NAV ── */
   .tab-nav { display:flex; background:var(--bg-dark); border-bottom:2px solid var(--border-gold); overflow-x:auto; padding:14px 18px 12px; gap:10px; align-items:center; }
@@ -74,8 +78,9 @@
   .panels-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; margin:20px 16px 40px; border:1px solid var(--border-gold); border-radius:8px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.5); }
   .panel { background:var(--bg-panel); display:flex; flex-direction:column; border-right:1px solid var(--border); min-width:0; }
   .panel:last-child { border-right:none; }
-  .panel-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 10px; background:var(--bg-dark); border-bottom:2px solid var(--border-gold); flex-shrink:0; }
-  .panel-title { font-family:'Cinzel',serif; font-size:.78rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+  .panel-header { display:flex; align-items:center; justify-content:center; position:relative; padding:18px 16px 14px; background:var(--bg-dark); border-bottom:2px solid var(--border-gold); flex-shrink:0; }
+  .panel-title { font-family:'Cinzel',serif; font-size:1.55rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; text-align:center; }
+  .panel-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; position:absolute; right:16px; top:50%; transform:translateY(-50%); }
   .panel-holdem  .panel-title { color:var(--accent-holdem); }
   .panel-omaha   .panel-title { color:var(--accent-omaha); }
   .panel-overall .panel-title { color:var(--gold); }
@@ -245,7 +250,7 @@
   .countdown { font-size:.68rem; color:var(--text-muted); font-family:'Cinzel',serif; letter-spacing:.08em; margin-top:3px; }
 
   /* ── RESULTS TAB ── */
-  .results-wrap { padding:0 0 48px; max-width:960px; margin:0 auto; }
+  .results-wrap { padding:0 0 48px; max-width:1280px; margin:0 auto; }
   .results-header { text-align:center; padding:32px 24px 24px; background:linear-gradient(180deg,#08090d 0%,var(--bg-card) 100%); border-bottom:2px solid var(--border-gold); position:relative; }
   .results-header::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent); }
   .results-hdr-eyebrow { font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.35em; color:var(--gold-dim); margin-bottom:10px; }
@@ -254,12 +259,12 @@
 
   /* Meta grid */
   .results-meta-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-bottom:1px solid var(--border); background:var(--bg-card); }
-  .results-meta-item { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px 12px 16px; border-right:1px solid var(--border); }
+  .results-meta-item { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 16px 24px; border-right:1px solid var(--border); }
   .results-meta-item:last-child { border-right:none; }
-  .rmi-icon  { font-size:1.3rem; margin-bottom:5px; }
-  .rmi-label { font-family:'Cinzel',serif; font-size:.56rem; font-weight:700; letter-spacing:.22em; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px; }
-  .rmi-value { font-family:'Cinzel',serif; font-size:1.05rem; font-weight:700; color:var(--gold-light); }
-  .rmi-sub   { font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.08em; color:var(--text-dim); margin-top:2px; }
+  .rmi-icon  { font-size:2.6rem; margin-bottom:8px; }
+  .rmi-label { font-family:'Cinzel',serif; font-size:1.1rem; font-weight:700; letter-spacing:.22em; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px; }
+  .rmi-value { font-family:'Cinzel',serif; font-size:2.1rem; font-weight:700; color:var(--gold-light); }
+  .rmi-sub   { font-family:'Cinzel',serif; font-size:1.2rem; letter-spacing:.08em; color:var(--text-dim); margin-top:4px; }
 
   /* Prize bar */
   .results-prize-bar { background:rgba(201,168,76,.06); border-bottom:1px solid var(--border-gold); padding:12px 22px; font-size:.82rem; color:var(--text-dim); display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
@@ -290,14 +295,14 @@
   /* Full results table */
   .results-table-section { padding:0 16px 40px; }
   .results-tbl-wrap { border:1px solid var(--border-gold); border-radius:6px; overflow:hidden; }
-  .results-tbl { width:100%; border-collapse:collapse; font-size:.84rem; }
+  .results-tbl { width:100%; border-collapse:collapse; font-size:1.25rem; }
   .results-tbl thead tr { background:var(--bg-dark); }
-  .results-tbl th { font-family:'Cinzel',serif; font-size:.6rem; font-weight:700; letter-spacing:.16em; color:var(--text-dim); text-transform:uppercase; padding:11px 13px; border-bottom:2px solid var(--border-gold); }
+  .results-tbl th { font-family:'Cinzel',serif; font-size:.9rem; font-weight:700; letter-spacing:.16em; color:var(--text-dim); text-transform:uppercase; padding:15px 18px; border-bottom:2px solid var(--border-gold); }
   .results-tbl th.r { text-align:right; }
-  .results-tbl td { padding:8px 13px; vertical-align:middle; border-bottom:1px solid var(--border); }
+  .results-tbl td { padding:12px 18px; vertical-align:middle; border-bottom:1px solid var(--border); }
   .results-tbl td.r { text-align:right; font-variant-numeric:tabular-nums; }
   .results-tbl tbody tr:last-child td { border-bottom:none; }
-  .results-player { color:var(--text-main); font-size:.86rem; }
+  .results-player { color:var(--text-main); font-size:1.3rem; }
   .itm-row { background:rgba(201,168,76,.045) !important; }
   .itm-row.r1 { background:rgba(201,168,76,.09) !important; border-left:3px solid var(--gold); }
   .itm-row.r2 { background:rgba(168,184,200,.06) !important; border-left:3px solid var(--silver); }
@@ -389,7 +394,7 @@
   .rv-trend-up  { color:#4caf50; }
   .rv-trend-dn  { color:var(--red); }
   .rv-trend-new { color:var(--accent-holdem); }
-  .rv-narrative { padding:11px 15px; font-size:.88rem; color:var(--text-dim); line-height:1.65; background:var(--bg-panel); font-style:italic; }
+  .rv-narrative { padding:11px 15px; font-size:1.05rem; color:var(--text-dim); line-height:1.7; background:var(--bg-panel); font-style:italic; }
   .rv-no-data  { text-align:center; padding:60px 20px; color:var(--text-muted); font-style:italic; }
   .rv-loading  { text-align:center; padding:40px 20px; color:var(--text-dim); font-style:italic; }
   .rv-updated  { text-align:right; padding:4px 16px 0; font-size:.7rem; color:var(--text-muted); font-style:italic; }
@@ -419,6 +424,8 @@
 
 <header>
   <div class="rune-border"></div>
+  <img class="header-avatar header-avatar-left"  src="https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warriors/OIG4B.png" alt="Nordic Warriors">
+  <img class="header-avatar header-avatar-right" src="https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warriors/NordicWarriors.jpeg" alt="Nordic Warriors">
   <h1>⚔ NORDIC WARRIORS ⚔</h1>
   <h2>Poker League &nbsp;·&nbsp; Stats &amp; Leaderboards</h2>
   <div class="header-ornament">⟡ ᚱ ᚢ ᚾ ᛖ ⟡</div>
@@ -1767,7 +1774,7 @@ document.getElementById('hvoSearch').addEventListener('input', function() {
 // ── START ─────────────────────────────────────────────────────
 loadData();
 </script>
- <div style="text-align: center; margin-top: 30px; padding-bottom: 30px;">
+<div style="text-align:center; margin-top:30px; padding-bottom:30px;">
   <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Frainsplace.github.io%2FNWWebApp%2F&label=Visits&icon=cloud-drizzle&color=%23198754&message=&style=flat&tz=US%2FEastern" alt="App Visits">
 </div>
 </body>
