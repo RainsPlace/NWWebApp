@@ -399,6 +399,61 @@
   .rv-loading  { text-align:center; padding:40px 20px; color:var(--text-dim); font-style:italic; }
   .rv-updated  { text-align:right; padding:4px 16px 0; font-size:.7rem; color:var(--text-muted); font-style:italic; }
   @media(max-width:480px) { .rv-stat { min-width:68px; } }
+
+  /* ── CHAMPIONS TAB ── */
+  .champ-wrap { padding:24px 16px 48px; max-width:1280px; margin:0 auto; }
+  .champ-section-hdr { font-family:'Cinzel',serif; font-size:.82rem; font-weight:700; letter-spacing:.28em; color:var(--gold-dim); text-transform:uppercase; text-align:center; padding:28px 0 16px; border-bottom:1px solid var(--border-gold); margin-bottom:24px; }
+  .champ-section-hdr span { font-size:1.5rem; display:block; margin-bottom:6px; }
+
+  /* Quarter champions grid */
+  .champ-quarter-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:16px; margin-bottom:40px; }
+  .champ-quarter-card { background:var(--bg-card); border:1px solid var(--border-gold); border-radius:8px; overflow:hidden; }
+  .champ-qcard-hdr { font-family:'Cinzel',serif; font-size:.78rem; font-weight:700; letter-spacing:.2em; color:var(--gold-dim); text-transform:uppercase; background:var(--bg-dark); padding:9px 14px; border-bottom:1px solid var(--border-gold); }
+  .champ-qcard-body { padding:12px 14px; display:flex; flex-direction:column; gap:9px; }
+  .champ-qrow { display:flex; align-items:center; gap:10px; }
+  .champ-qrow-cat { font-family:'Cinzel',serif; font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; min-width:70px; flex-shrink:0; }
+  .champ-qrow-cat.cat-overall { color:var(--gold); }
+  .champ-qrow-cat.cat-holdem  { color:var(--accent-holdem); }
+  .champ-qrow-cat.cat-omaha   { color:var(--accent-omaha); }
+  .champ-qrow-avatar { width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--border); flex-shrink:0; }
+  .champ-qrow-avatar-ph { width:28px; height:28px; border-radius:50%; background:var(--bg-panel); border:1px solid var(--border); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:.68rem; color:var(--text-muted); }
+  .champ-qrow-name { font-size:.9rem; color:var(--text-main); }
+
+  /* All-time standings */
+  .champ-standings { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:16px; margin-bottom:40px; }
+  .champ-player-card { background:var(--bg-card); border:1px solid var(--border); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; align-items:center; padding:18px 12px 16px; gap:8px; transition:border-color .2s; }
+  .champ-player-card:hover { border-color:var(--gold-dim); }
+  .champ-player-card.rank1 { border-color:var(--gold); background:rgba(201,168,76,.06); }
+  .champ-player-card.rank2 { border-color:var(--silver); background:rgba(168,184,200,.04); }
+  .champ-player-card.rank3 { border-color:var(--bronze); background:rgba(196,122,69,.04); }
+  .champ-avatar { width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid var(--border); flex-shrink:0; }
+  .champ-player-card.rank1 .champ-avatar { border-color:var(--gold); box-shadow:0 0 14px rgba(201,168,76,.3); }
+  .champ-player-card.rank2 .champ-avatar { border-color:var(--silver); }
+  .champ-player-card.rank3 .champ-avatar { border-color:var(--bronze); }
+  .champ-avatar-ph { width:72px; height:72px; border-radius:50%; background:var(--bg-panel); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:1.8rem; color:var(--text-muted); }
+  .champ-player-name { font-family:'Cinzel',serif; font-size:.9rem; font-weight:700; letter-spacing:.06em; color:var(--text-main); text-align:center; }
+  .champ-player-card.rank1 .champ-player-name { color:var(--gold-light); font-size:1rem; }
+  .champ-player-card.rank2 .champ-player-name { color:var(--silver); }
+  .champ-player-card.rank3 .champ-player-name { color:var(--bronze); }
+  .champ-total-badge { font-family:'Cinzel',serif; font-size:.68rem; font-weight:700; letter-spacing:.12em; background:rgba(201,168,76,.12); color:var(--gold); border:1px solid var(--gold-dim); border-radius:20px; padding:3px 10px; white-space:nowrap; }
+  .champ-tally { display:flex; gap:10px; margin-top:2px; flex-wrap:wrap; justify-content:center; }
+  .champ-tally-item { text-align:center; }
+  .champ-tally-val { font-family:'Cinzel',serif; font-size:.88rem; font-weight:700; }
+  .champ-tally-lbl { font-family:'Cinzel',serif; font-size:.54rem; letter-spacing:.1em; color:var(--text-muted); text-transform:uppercase; }
+  .champ-tally-item.ct-holdem  .champ-tally-val { color:var(--accent-holdem); }
+  .champ-tally-item.ct-omaha   .champ-tally-val { color:var(--accent-omaha); }
+  .champ-tally-item.ct-overall .champ-tally-val { color:var(--gold); }
+
+  /* Quarter wins */
+  .champ-wins-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  .champ-win-card { background:var(--bg-card); border:1px solid var(--border); border-radius:6px; display:flex; align-items:center; gap:12px; padding:10px 14px; transition:border-color .2s; }
+  .champ-win-card:hover { border-color:var(--gold-dim); }
+  .champ-win-quarter { font-family:'Cinzel',serif; font-size:.7rem; font-weight:700; letter-spacing:.1em; color:var(--text-dim); min-width:60px; flex-shrink:0; }
+  .champ-win-avatar { width:34px; height:34px; border-radius:50%; object-fit:cover; border:1px solid var(--border); flex-shrink:0; }
+  .champ-win-avatar-ph { width:34px; height:34px; border-radius:50%; background:var(--bg-panel); border:1px solid var(--border); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:.85rem; color:var(--text-muted); }
+  .champ-win-name { font-size:.88rem; color:var(--text-main); flex:1; }
+  .champ-win-count { font-family:'Cinzel',serif; font-size:.82rem; font-weight:700; color:var(--gold); white-space:nowrap; }
+  .champ-loading { text-align:center; padding:60px 20px; color:var(--text-muted); font-style:italic; }
 </style>
 </head>
 <body>
@@ -442,7 +497,8 @@
   <button class="tab-btn" id="tab-hvo" onclick="switchTab('hvo')">♠♦ HOLDEM vs OMAHA</button>
   <button class="tab-btn" id="tab-calendar" onclick="switchTab('calendar')">📅 CALENDAR</button>
   <button class="tab-btn active" id="tab-results"  onclick="switchTab('results')">🏆 RESULTS</button>
-  <button class="tab-btn"        id="tab-gamereview" onclick="switchTab('gamereview')">🎖 LATEST GAME REVIEW</button>
+  <button class="tab-btn"        id="tab-gamereview"  onclick="switchTab('gamereview')">🎖 LATEST GAME REVIEW</button>
+  <button class="tab-btn"        id="tab-champions"   onclick="switchTab('champions')">♛ CHAMPIONS</button>
 </div>
 
 <!-- LEADERBOARD CONTROLS (hidden on other tabs) -->
@@ -701,6 +757,13 @@
   </div>
 </div><!-- end section-gamereview -->
 
+<!-- ══ CHAMPIONS SECTION ══ -->
+<div id="section-champions" style="display:none">
+  <div id="champions-content" class="champ-wrap">
+    <!-- populated by loadChampions() / renderChampions() -->
+  </div>
+</div><!-- end section-champions -->
+
 <footer>
   <span class="fr">⟡ ᚾ ᚩ ᚱ ᛞ ᛁ ᚳ ⟡</span>
   Nordic Warriors Poker League &nbsp;·&nbsp; Live data from Google Sheets
@@ -731,10 +794,15 @@ var activeTab     = 'results';
 var activePeriod  = 'Overall';
 var refreshTimer, countdownTimer, nextAt;
 var statsLoaded   = false; // lazy-loaded when Leaders or HvO tab clicked
-var REVIEW_DATA   = null;
-var reviewLoaded  = false; // lazy-loaded when Game Review tab clicked
-var LS_REVIEW     = 'nw_review_v5';
-var LS_REVIEW_GEN = 'nw_review_gen_v5';
+var REVIEW_DATA     = null;
+var reviewLoaded    = false; // lazy-loaded when Game Review tab clicked
+var LS_REVIEW       = 'nw_review_v5';
+var LS_REVIEW_GEN   = 'nw_review_gen_v5';
+
+var CHAMPIONS_DATA  = null;
+var championsLoaded = false; // lazy-loaded when Champions tab clicked
+var LS_CHAMPIONS    = 'nw_champions_v1';
+var LS_CHAMP_GEN    = 'nw_champ_gen_v1';
 
 // Leaderboard sort/search
 var sortState   = { holdem:{col:'rank',asc:true}, omaha:{col:'rank',asc:true}, overall:{col:'rank',asc:true} };
@@ -964,7 +1032,7 @@ function showError(msg) {
 // ── TAB SWITCHING ─────────────────────────────────────────────
 function switchTab(tab) {
   activeTab = tab;
-  ['leaderboard','leaders','hvo','calendar','results','gamereview'].forEach(function(t) {
+  ['leaderboard','leaders','hvo','calendar','results','gamereview','champions'].forEach(function(t) {
     document.getElementById('tab-' + t).classList.toggle('active', t === tab);
     document.getElementById('section-' + t).style.display = (t === tab) ? '' : 'none';
   });
@@ -975,6 +1043,7 @@ function switchTab(tab) {
   if (tab === 'calendar')   renderCalTab();
   if (tab === 'results')    renderLatestGame();
   if (tab === 'gamereview') { if (!reviewLoaded) loadReview(); }
+  if (tab === 'champions')  { if (!championsLoaded) loadChampions(); else renderChampions(CHAMPIONS_DATA); }
 }
 
 // ── PERIOD BAR ────────────────────────────────────────────────
@@ -1787,6 +1856,143 @@ document.getElementById('hvoSearch').addEventListener('input', function() {
   hvoSearch = this.value.trim();
   if (activeTab === 'hvo') renderHvoTab();
 });
+
+// ── CHAMPIONS TAB ─────────────────────────────────────────────
+var AVATAR_BASE = 'https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warrior%20Champions/';
+var AVATAR_MAP = {
+  'Bradspam':     'Bradspam.jpg',
+  'CANTFIXSTUPID':'CANTFIXSTUPID.jpg',
+  'Excaliburns':  'Excaliburns.png',
+  'MrFish68':     'MrFish68.png',
+  'Nebulos':      'Nebulos.jpg',
+  'Sue13':        'Sue13.png',
+  'Younguru':     'Younguru.jpeg',
+  '_Rain_':       '_Rain_.jpeg',
+  '_snowman_':    '_snowman_.jpg',
+  'southwestmba': 'southwestmba%20.png',
+  'tinboat':      'tinboat.jpg'
+};
+
+function champAvatar(player, imgClass, phClass) {
+  var file = AVATAR_MAP[player];
+  if (!file) return '<div class="' + phClass + '">' + esc((player || '?').charAt(0).toUpperCase()) + '</div>';
+  return '<img class="' + imgClass + '" src="' + AVATAR_BASE + file + '" alt="' + esc(player) + '">';
+}
+
+function loadChampions() {
+  try {
+    var raw = localStorage.getItem(LS_CHAMPIONS);
+    var gen = localStorage.getItem(LS_CHAMP_GEN);
+    if (raw && gen) {
+      var parsed = JSON.parse(raw);
+      if (parsed && parsed.quarterChampions) {
+        CHAMPIONS_DATA  = parsed;
+        championsLoaded = true;
+        renderChampions(parsed);
+        if ((Date.now() - parseInt(gen)) >= REFRESH_MS) {
+          fetchChampionsFromServer(true);
+        }
+        return;
+      }
+    }
+  } catch(e) {}
+  document.getElementById('champions-content').innerHTML = '<div class="champ-loading">Loading champions data…</div>';
+  fetchChampionsFromServer(false);
+}
+
+function fetchChampionsFromServer(isBackground) {
+  fetch(WEBAPP_URL + '?get=champions&_=' + Date.now())
+    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(data) {
+      CHAMPIONS_DATA  = data;
+      championsLoaded = true;
+      try {
+        localStorage.setItem(LS_CHAMPIONS, JSON.stringify(data));
+        localStorage.setItem(LS_CHAMP_GEN, String(Date.now()));
+      } catch(e) {}
+      renderChampions(data);
+    })
+    .catch(function(err) {
+      if (!isBackground) {
+        document.getElementById('champions-content').innerHTML =
+          '<div class="champ-loading" style="color:var(--red)">Could not load champions: ' + esc(String(err.message || err)) + '</div>';
+      }
+    });
+}
+
+function renderChampions(data) {
+  var el = document.getElementById('champions-content');
+  if (!data || data.error) {
+    el.innerHTML = '<div class="champ-loading" style="color:var(--red)">' + esc((data && data.error) || 'No champions data available.') + '</div>';
+    return;
+  }
+
+  var html = '';
+
+  // ── Section 1: Quarter Champions Timeline ──────────────────
+  html += '<div class="champ-section-hdr"><span>♛</span>QUARTERLY CHAMPIONS</div>';
+
+  // Group by quarter (preserving order from sheet, then reverse for newest-first)
+  var quarterMap = {}, quarterOrder = [];
+  (data.quarterChampions || []).forEach(function(entry) {
+    var q = entry.quarter;
+    if (!quarterMap[q]) { quarterMap[q] = []; quarterOrder.push(q); }
+    quarterMap[q].push(entry);
+  });
+  quarterOrder = quarterOrder.slice().reverse();
+
+  html += '<div class="champ-quarter-grid">';
+  quarterOrder.forEach(function(q) {
+    html += '<div class="champ-quarter-card">' +
+      '<div class="champ-qcard-hdr">⚔ ' + esc(q) + '</div>' +
+      '<div class="champ-qcard-body">';
+    quarterMap[q].forEach(function(entry) {
+      var cat = entry.category;
+      var catClass = cat.toLowerCase().indexOf('overall') !== -1 ? 'cat-overall' :
+                     cat.toLowerCase().indexOf('holdem') !== -1  ? 'cat-holdem'  : 'cat-omaha';
+      html += '<div class="champ-qrow">' +
+        '<span class="champ-qrow-cat ' + catClass + '">' + esc(cat) + '</span>' +
+        champAvatar(entry.champ, 'champ-qrow-avatar', 'champ-qrow-avatar-ph') +
+        '<span class="champ-qrow-name">' + esc(entry.champ) + '</span>' +
+      '</div>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+
+  // ── Section 2: All-Time Championship Standings ─────────────
+  html += '<div class="champ-section-hdr"><span>🏆</span>ALL-TIME CHAMPIONSHIP STANDINGS</div>';
+  html += '<div class="champ-standings">';
+  (data.playerChampionships || []).forEach(function(p, idx) {
+    var rankClass = idx === 0 ? 'rank1' : idx === 1 ? 'rank2' : idx === 2 ? 'rank3' : '';
+    html += '<div class="champ-player-card ' + rankClass + '">' +
+      champAvatar(p.player, 'champ-avatar', 'champ-avatar-ph') +
+      '<div class="champ-player-name">' + esc(p.player) + '</div>' +
+      '<div class="champ-total-badge">' + p.total + (p.total === 1 ? ' Championship' : ' Championships') + '</div>' +
+      '<div class="champ-tally">';
+    if (p.holdem)  html += '<div class="champ-tally-item ct-holdem"><div class="champ-tally-val">' + p.holdem + '</div><div class="champ-tally-lbl">Hold\'em</div></div>';
+    if (p.omaha)   html += '<div class="champ-tally-item ct-omaha"><div class="champ-tally-val">' + p.omaha + '</div><div class="champ-tally-lbl">Omaha</div></div>';
+    if (p.overall) html += '<div class="champ-tally-item ct-overall"><div class="champ-tally-val">' + p.overall + '</div><div class="champ-tally-lbl">Overall</div></div>';
+    html += '</div></div>';
+  });
+  html += '</div>';
+
+  // ── Section 3: Most Wins Per Quarter ──────────────────────
+  html += '<div class="champ-section-hdr"><span>⚡</span>MOST WINS IN A QUARTER</div>';
+  html += '<div class="champ-wins-grid">';
+  var qWins = (data.quarterWins || []).slice().reverse(); // newest first
+  qWins.forEach(function(entry) {
+    html += '<div class="champ-win-card">' +
+      '<div class="champ-win-quarter">' + esc(entry.quarter) + '</div>' +
+      champAvatar(entry.player, 'champ-win-avatar', 'champ-win-avatar-ph') +
+      '<div class="champ-win-name">' + esc(entry.player) + '</div>' +
+      '<div class="champ-win-count">' + entry.wins + ' wins</div>' +
+    '</div>';
+  });
+  html += '</div>';
+
+  el.innerHTML = html;
+}
 
 // ── START ─────────────────────────────────────────────────────
 loadData();
