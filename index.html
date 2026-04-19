@@ -445,7 +445,9 @@
   .champ-tally-item.ct-overall .champ-tally-val { color:var(--gold); }
 
   /* Quarter wins */
-  .champ-wins-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  .champ-wins-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  @media(max-width:900px)  { .champ-wins-grid { grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:480px)  { .champ-wins-grid { grid-template-columns:1fr; } }
   .champ-win-card { background:var(--bg-card); border:1px solid var(--border); border-radius:6px; display:flex; align-items:center; gap:12px; padding:10px 14px; transition:border-color .2s; }
   .champ-win-card:hover { border-color:var(--gold-dim); }
   .champ-win-quarter { font-family:'Cinzel',serif; font-size:.7rem; font-weight:700; letter-spacing:.1em; color:var(--text-dim); min-width:60px; flex-shrink:0; }
@@ -1870,7 +1872,8 @@ var AVATAR_MAP = {
   '_Rain_':       '_Rain_.jpeg',
   '_snowman_':    '_snowman_.jpg',
   'southwestmba': 'southwestmba%20.png',
-  'tinboat':      'tinboat.jpg'
+  'tinboat':      'tinboat.jpg',
+  'DenaliD':      'DenaliD.jpg'
 };
 
 function champAvatar(player, imgClass, phClass) {
@@ -1963,8 +1966,11 @@ function renderChampions(data) {
   // ── Section 2: All-Time Championship Standings ─────────────
   html += '<div class="champ-section-hdr"><span>🏆</span>ALL-TIME CHAMPIONSHIP STANDINGS</div>';
   html += '<div class="champ-standings">';
+  var prevTotal = null, prevRank = 0;
   (data.playerChampionships || []).forEach(function(p, idx) {
-    var rankClass = idx === 0 ? 'rank1' : idx === 1 ? 'rank2' : idx === 2 ? 'rank3' : '';
+    var rank = (p.total !== prevTotal) ? idx + 1 : prevRank;
+    prevRank = rank; prevTotal = p.total;
+    var rankClass = rank === 1 ? 'rank1' : rank === 2 ? 'rank2' : rank === 3 ? 'rank3' : '';
     html += '<div class="champ-player-card ' + rankClass + '">' +
       champAvatar(p.player, 'champ-avatar', 'champ-avatar-ph') +
       '<div class="champ-player-name">' + esc(p.player) + '</div>' +
