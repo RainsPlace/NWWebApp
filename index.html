@@ -52,7 +52,8 @@
   @media(max-width:700px){ .header-avatar { display:none; } }
 
   /* ── TAB NAV ── */
-  .tab-nav { display:flex; background:var(--bg-dark); border-bottom:2px solid var(--border-gold); overflow-x:auto; padding:14px 18px 12px; gap:10px; align-items:center; }
+  .tab-nav { display:flex; flex-direction:column; background:var(--bg-dark); border-bottom:2px solid var(--border-gold); padding:12px 18px; gap:8px; }
+  .tab-row { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
   .tab-btn { font-family:'Cinzel',serif; font-size:.96rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; padding:11px 28px; cursor:pointer; border:2px solid transparent; border-radius:50px; background:transparent; color:var(--text-dim); transition:all .2s; white-space:nowrap; }
   .tab-btn:hover { color:var(--gold-dim); border-color:var(--gold-dim); background:rgba(201,168,76,.04); }
   .tab-btn.active { color:var(--gold); border-color:var(--gold); background:rgba(201,168,76,.09); box-shadow:0 0 18px rgba(201,168,76,.22),inset 0 0 10px rgba(201,168,76,.07); }
@@ -68,7 +69,7 @@
   .refresh-btn.spinning .ri { animation:spin .6s linear infinite; display:inline-block; }
 
   /* ── PERIOD BAR ── */
-  .period-bar { display:flex; align-items:center; gap:8px; padding:13px 20px; background:var(--bg-card); border-bottom:1px solid var(--border); overflow-x:auto; flex-wrap:nowrap; }
+  .period-bar { display:flex; align-items:center; gap:8px; padding:13px 20px; background:var(--bg-card); border-bottom:1px solid var(--border); flex-wrap:wrap; }
   .period-label { font-family:'Cinzel',serif; font-size:.78rem; letter-spacing:.18em; color:var(--text-muted); margin-right:6px; white-space:nowrap; flex-shrink:0; }
   .period-btn { font-family:'Cinzel',serif; font-size:.86rem; font-weight:700; letter-spacing:.1em; padding:9px 20px; border:1px solid var(--border); border-radius:24px; background:transparent; color:var(--text-dim); cursor:pointer; white-space:nowrap; transition:all .2s; flex-shrink:0; }
   .period-btn:hover { border-color:var(--gold-dim); color:var(--gold-dim); }
@@ -91,35 +92,35 @@
   .panel-podium { display:flex; align-items:flex-end; justify-content:center; gap:8px; padding:20px 12px 16px; background:linear-gradient(180deg,#0f1218 0%,var(--bg-panel) 100%); border-bottom:1px solid var(--border); flex-shrink:0; }
   .pp { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; min-width:0; }
   .pp:nth-child(1){order:2} .pp:nth-child(2){order:1} .pp:nth-child(3){order:3}
-  .pp-crown  { font-size:1rem; line-height:1; }
-  .pp-avatar { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:.85rem; font-weight:900; border:2px solid; flex-shrink:0; }
-  .pp:nth-child(1) .pp-avatar { border-color:var(--gold);   background:rgba(201,168,76,.15); color:var(--gold);   width:40px; height:40px; font-size:1rem; }
+  .pp-crown  { font-size:1.5rem; line-height:1; }
+  .pp-avatar { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:1.28rem; font-weight:900; border:2px solid; flex-shrink:0; }
+  .pp:nth-child(1) .pp-avatar { border-color:var(--gold);   background:rgba(201,168,76,.15); color:var(--gold);   width:60px; height:60px; font-size:1.5rem; }
   .pp:nth-child(2) .pp-avatar { border-color:var(--silver); background:rgba(168,184,200,.1); color:var(--silver); }
   .pp:nth-child(3) .pp-avatar { border-color:var(--bronze); background:rgba(196,122,69,.1);  color:var(--bronze); }
-  .pp-name { font-family:'Cinzel',serif; font-size:.6rem; font-weight:700; letter-spacing:.03em; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
-  .pp:nth-child(1) .pp-name { color:var(--gold);   font-size:.65rem; }
+  .pp-name { font-family:'Cinzel',serif; font-size:.9rem; font-weight:700; letter-spacing:.03em; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
+  .pp:nth-child(1) .pp-name { color:var(--gold);   font-size:.98rem; }
   .pp:nth-child(2) .pp-name { color:var(--silver); }
   .pp:nth-child(3) .pp-name { color:var(--bronze); }
-  .pp-pts { font-size:.7rem; font-weight:600; color:var(--text-main); }
-  .pp:nth-child(1) .pp-pts { font-size:.8rem; }
-  .pp-sub { font-size:.55rem; color:var(--text-dim); }
-  .pp-block { width:100%; border-radius:3px 3px 0 0; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:.75rem; font-weight:900; }
-  .pp:nth-child(1) .pp-block { background:linear-gradient(135deg,#3a2e10,#5a4520); color:var(--gold);   height:44px; }
-  .pp:nth-child(2) .pp-block { background:linear-gradient(135deg,#202830,#303848); color:var(--silver); height:30px; }
-  .pp:nth-child(3) .pp-block { background:linear-gradient(135deg,#281a10,#402a18); color:var(--bronze); height:22px; }
+  .pp-pts { font-size:1.05rem; font-weight:600; color:var(--text-main); }
+  .pp:nth-child(1) .pp-pts { font-size:1.2rem; }
+  .pp-sub { font-size:.83rem; color:var(--text-dim); }
+  .pp-block { width:100%; border-radius:3px 3px 0 0; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:1.13rem; font-weight:900; }
+  .pp:nth-child(1) .pp-block { background:linear-gradient(135deg,#3a2e10,#5a4520); color:var(--gold);   height:66px; }
+  .pp:nth-child(2) .pp-block { background:linear-gradient(135deg,#202830,#303848); color:var(--silver); height:45px; }
+  .pp:nth-child(3) .pp-block { background:linear-gradient(135deg,#281a10,#402a18); color:var(--bronze); height:33px; }
   .panel-search { display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--border); flex-shrink:0; }
-  .panel-search input { flex:1; background:var(--bg-row); color:var(--text-main); border:1px solid var(--border); border-radius:4px; padding:6px 10px; font-family:'Crimson Pro',serif; font-size:.85rem; outline:none; min-width:0; }
+  .panel-search input { flex:1; background:var(--bg-row); color:var(--text-main); border:1px solid var(--border); border-radius:4px; padding:6px 10px; font-family:'Crimson Pro',serif; font-size:1.28rem; outline:none; min-width:0; }
   .panel-search input:focus { border-color:var(--gold-dim); }
   .panel-search input::placeholder { color:var(--text-muted); }
-  .panel-count { font-size:.72rem; color:var(--text-dim); white-space:nowrap; font-style:italic; }
-  .panel-table-wrap { overflow-y:auto; overflow-x:auto; flex:1; max-height:600px; }
-  table { width:100%; border-collapse:collapse; font-size:.82rem; }
+  .panel-count { font-size:1.08rem; color:var(--text-dim); white-space:nowrap; font-style:italic; }
+  .panel-table-wrap { overflow-y:auto; overflow-x:auto; flex:1; max-height:900px; }
+  table { width:100%; border-collapse:collapse; font-size:1.23rem; }
   thead tr { background:var(--bg-dark); position:sticky; top:0; z-index:1; }
-  th { font-family:'Cinzel',serif; font-size:.58rem; font-weight:700; letter-spacing:.15em; color:var(--text-dim); text-transform:uppercase; padding:9px 10px; text-align:left; cursor:pointer; user-select:none; white-space:nowrap; transition:color .15s; border-bottom:1px solid var(--border-gold); }
+  th { font-family:'Cinzel',serif; font-size:.87rem; font-weight:700; letter-spacing:.15em; color:var(--text-dim); text-transform:uppercase; padding:9px 10px; text-align:left; cursor:pointer; user-select:none; white-space:nowrap; transition:color .15s; border-bottom:1px solid var(--border-gold); }
   th:hover { color:var(--gold); }
   th.sorted { color:var(--gold-light); }
   th.r { text-align:right; }
-  .sa { margin-left:3px; opacity:.5; font-size:.6rem; }
+  .sa { margin-left:3px; opacity:.5; font-size:.9rem; }
   th.sorted .sa { opacity:1; }
   tbody tr { border-bottom:1px solid var(--border); transition:background .1s; }
   tbody tr:nth-child(even) { background:var(--bg-row-alt); }
@@ -130,7 +131,7 @@
   tbody tr.r3 { background:rgba(196,122,69,.06)  !important; border-left:2px solid var(--bronze); }
   td { padding:7px 10px; vertical-align:middle; }
   td.r { text-align:right; font-variant-numeric:tabular-nums; }
-  .rc { font-family:'Cinzel',serif; font-weight:700; font-size:.78rem; color:var(--text-muted); }
+  .rc { font-family:'Cinzel',serif; font-weight:700; font-size:1.17rem; color:var(--text-muted); }
   .r1 .rc { color:var(--gold); } .r2 .rc { color:var(--silver); } .r3 .rc { color:var(--bronze); }
   .pc { color:var(--text-main); }
   .ptc { font-weight:600; color:var(--text-main); font-variant-numeric:tabular-nums; }
@@ -144,7 +145,7 @@
   .hbar { background:linear-gradient(90deg,#2a5a80,var(--accent-holdem)); }
   .obar { background:linear-gradient(90deg,#4a2a80,var(--accent-omaha)); }
   .ebar { background:linear-gradient(90deg,var(--gold-dim),var(--gold)); }
-  .empty-msg { text-align:center; padding:40px 16px; color:var(--text-muted); font-style:italic; font-size:.9rem; }
+  .empty-msg { text-align:center; padding:40px 16px; color:var(--text-muted); font-style:italic; font-size:1.35rem; }
 
   /* ── STAT CARDS (Leaders Tab) ── */
   .leaders-section { padding:20px 16px 40px; }
@@ -177,18 +178,18 @@
   @media (max-width:380px)  { .stat-cards-grid { grid-template-columns:1fr; } }
 
   /* ── HVO TABLE (Holdem vs Omaha Tab) ── */
-  .hvo-section { padding:16px 16px 40px; }
+  .hvo-section { padding:16px 16px 40px; max-width:75%; margin:0 auto; }
   .hvo-top-bar { display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
   .hvo-top-bar input { background:var(--bg-panel); color:var(--text-main); border:1px solid var(--border); border-radius:4px; padding:7px 12px; font-family:'Crimson Pro',serif; font-size:.88rem; outline:none; min-width:180px; max-width:280px; }
   .hvo-top-bar input:focus { border-color:var(--gold-dim); }
   .hvo-top-bar input::placeholder { color:var(--text-muted); }
   .hvo-cnt { font-size:.78rem; color:var(--text-dim); font-style:italic; }
-  .hvo-tbl-wrap { overflow-x:auto; border:1px solid var(--border-gold); border-radius:6px; max-height:70vh; overflow-y:auto; }
-  .hvo-tbl { width:100%; border-collapse:collapse; font-size:.75rem; min-width:960px; }
+  .hvo-tbl-wrap { overflow-x:auto; overflow-y:auto; max-height:1100px; border:1px solid var(--border-gold); border-radius:6px; margin-bottom:20px; }
+  .hvo-tbl { width:100%; border-collapse:collapse; font-size:1.2rem; }
   .hvo-tbl thead { position:sticky; top:0; z-index:4; }
 
   /* group header row */
-  .hvo-grp th { font-family:'Cinzel',serif; font-size:.6rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:7px 8px 4px; text-align:center; background:var(--bg-dark); color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap; }
+  .hvo-grp th { font-family:'Cinzel',serif; font-size:1.2rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:7px 8px 4px; text-align:center; background:var(--bg-dark); color:var(--text-dim); border-bottom:1px solid var(--border); white-space:nowrap; }
   .hvo-grp th.hg-games  { color:#7ab8e0; border-top:2px solid #2a5a80; }
   .hvo-grp th.hg-wins   { color:var(--gold-dim); border-top:2px solid var(--border-gold); }
   .hvo-grp th.hg-winpct { color:var(--gold-dim); border-top:2px solid var(--border-gold); }
@@ -200,7 +201,7 @@
   .hvo-grp th.hg-roi    { color:#7ac87a; border-top:2px solid #408040; }
 
   /* sub-header row (sortable) */
-  .hvo-sub th { font-family:'Cinzel',serif; font-size:.57rem; font-weight:700; letter-spacing:.08em; padding:4px 7px 6px; text-align:center; background:var(--bg-panel); border-bottom:2px solid var(--border-gold); cursor:pointer; user-select:none; color:var(--text-muted); transition:color .15s; white-space:nowrap; }
+  .hvo-sub th { font-family:'Cinzel',serif; font-size:1.14rem; font-weight:700; letter-spacing:.08em; padding:4px 7px 6px; text-align:center; background:var(--bg-panel); border-bottom:2px solid var(--border-gold); cursor:pointer; user-select:none; color:var(--text-muted); transition:color .15s; white-space:nowrap; }
   .hvo-sub th:hover { color:var(--gold); }
   .hvo-sub th.sorted { color:var(--gold-light); }
 
@@ -208,7 +209,7 @@
   .hvo-player-hdr { text-align:left !important; background:var(--bg-dark) !important; color:var(--text-dim) !important; border-right:1px solid var(--border-gold) !important; position:sticky; left:0; z-index:5; cursor:pointer; user-select:none; }
   .hvo-player-hdr:hover { color:var(--gold) !important; }
   .hvo-player-hdr.sorted { color:var(--gold-light) !important; }
-  .hvo-roi-hdr { font-family:'Cinzel',serif; font-size:.6rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:7px 10px; text-align:center; background:var(--bg-dark); color:#7ac87a; border-top:2px solid #408040; cursor:pointer; user-select:none; white-space:nowrap; }
+  .hvo-roi-hdr { font-family:'Cinzel',serif; font-size:1.2rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:7px 10px; text-align:center; background:var(--bg-dark); color:#7ac87a; border-top:2px solid #408040; cursor:pointer; user-select:none; white-space:nowrap; }
   .hvo-roi-hdr:hover { color:#a0e0a0; }
   .hvo-roi-hdr.sorted { color:#c0f0c0; }
 
@@ -218,7 +219,7 @@
   .hvo-tbl tbody tr:nth-child(odd)  { background:var(--bg-row); }
   .hvo-tbl tbody tr:hover           { background:rgba(201,168,76,.04); }
   .hvo-tbl td { padding:5px 7px; text-align:right; vertical-align:middle; font-variant-numeric:tabular-nums; color:var(--text-dim); }
-  .hvo-tbl td.hvo-pc { text-align:left; color:var(--text-main); font-size:.8rem; padding:5px 10px; position:sticky; left:0; background:inherit; border-right:1px solid var(--border); z-index:1; white-space:nowrap; }
+  .hvo-tbl td.hvo-pc { text-align:left; color:var(--text-main); font-size:1.28rem; padding:5px 10px; position:sticky; left:0; background:inherit; border-right:1px solid var(--border); z-index:1; white-space:nowrap; }
   .hvo-tbl td.hvo-tot { color:var(--text-main); font-weight:600; }
   .hvo-tbl td.hvo-neg { color:var(--red) !important; font-weight:600; }
   .hvo-tbl td.hvo-pos { color:var(--green) !important; font-weight:600; }
@@ -496,13 +497,17 @@
 
 <!-- TAB NAVIGATION -->
 <div class="tab-nav">
-  <button class="tab-btn" id="tab-leaderboard" onclick="switchTab('leaderboard')">⚔ LEADERBOARD</button>
-  <button class="tab-btn" id="tab-leaders" onclick="switchTab('leaders')">★ LEADERS</button>
-  <button class="tab-btn" id="tab-hvo" onclick="switchTab('hvo')">♠♦ HOLDEM vs OMAHA</button>
-  <button class="tab-btn" id="tab-calendar" onclick="switchTab('calendar')">📅 CALENDAR</button>
-  <button class="tab-btn active" id="tab-results"  onclick="switchTab('results')">🏆 RESULTS</button>
-  <button class="tab-btn"        id="tab-gamereview"  onclick="switchTab('gamereview')">🎖 LATEST GAME REVIEW</button>
-  <button class="tab-btn"        id="tab-champions"   onclick="switchTab('champions')">♛ CHAMPIONS</button>
+  <div class="tab-row">
+    <button class="tab-btn" id="tab-leaderboard" onclick="switchTab('leaderboard')">⚔ LEADERBOARD</button>
+    <button class="tab-btn" id="tab-leaders" onclick="switchTab('leaders')">★ LEADERS</button>
+    <button class="tab-btn" id="tab-hvo" onclick="switchTab('hvo')">♠♦ HOLDEM vs OMAHA</button>
+    <button class="tab-btn" id="tab-calendar" onclick="switchTab('calendar')">📅 CALENDAR</button>
+  </div>
+  <div class="tab-row">
+    <button class="tab-btn active" id="tab-results"     onclick="switchTab('results')">🏆 RESULTS</button>
+    <button class="tab-btn"        id="tab-gamereview"  onclick="switchTab('gamereview')">🎖 LATEST GAME REVIEW</button>
+    <button class="tab-btn"        id="tab-champions"   onclick="switchTab('champions')">♛ CHAMPIONS</button>
+  </div>
 </div>
 
 <!-- LEADERBOARD CONTROLS (hidden on other tabs) -->
@@ -680,7 +685,7 @@
       <span class="hvo-cnt" id="hvoCnt"></span>
     </div>
     <div class="hvo-tbl-wrap">
-      <table class="hvo-tbl" id="tblHvo">
+      <table class="hvo-tbl" id="tblHvo1">
         <thead>
           <tr class="hvo-grp">
             <th rowspan="2" class="hvo-player-hdr" data-hvo="player">PLAYER <span class="sa"></span></th>
@@ -689,10 +694,6 @@
             <th colspan="2" class="hg-winpct hvo-gs">WIN %</th>
             <th colspan="3" class="hg-itm hvo-gs">ITM</th>
             <th colspan="2" class="hg-itmpct hvo-gs">ITM %</th>
-            <th colspan="3" class="hg-pts hvo-gs">POINTS</th>
-            <th colspan="3" class="hg-chips hvo-gs">CHIPS WON</th>
-            <th colspan="3" class="hg-bounty hvo-gs">BOUNTY CHIPS</th>
-            <th rowspan="2" class="hvo-roi-hdr hvo-gs" data-hvo="roi">ROI <span class="sa"></span></th>
           </tr>
           <tr class="hvo-sub">
             <th data-hvo="h_games">H<span class="sa"></span></th>
@@ -708,6 +709,22 @@
             <th data-hvo="t_itm">Tot<span class="sa"></span></th>
             <th data-hvo="h_itmpct" class="hvo-gs">H<span class="sa"></span></th>
             <th data-hvo="o_itmpct">O<span class="sa"></span></th>
+          </tr>
+        </thead>
+        <tbody id="hvoBody1"></tbody>
+      </table>
+    </div>
+    <div class="hvo-tbl-wrap">
+      <table class="hvo-tbl" id="tblHvo2">
+        <thead>
+          <tr class="hvo-grp">
+            <th rowspan="2" class="hvo-player-hdr" data-hvo="player">PLAYER <span class="sa"></span></th>
+            <th colspan="3" class="hg-pts hvo-gs">POINTS</th>
+            <th colspan="3" class="hg-chips hvo-gs">CHIPS WON</th>
+            <th colspan="3" class="hg-bounty hvo-gs">BOUNTY CHIPS</th>
+            <th rowspan="2" class="hvo-roi-hdr hvo-gs" data-hvo="roi">ROI <span class="sa"></span></th>
+          </tr>
+          <tr class="hvo-sub">
             <th data-hvo="h_points" class="hvo-gs">H<span class="sa"></span></th>
             <th data-hvo="o_points">O<span class="sa"></span></th>
             <th data-hvo="t_points">Tot<span class="sa"></span></th>
@@ -719,7 +736,7 @@
             <th data-hvo="t_bounty">Tot<span class="sa"></span></th>
           </tr>
         </thead>
-        <tbody id="hvoBody"></tbody>
+        <tbody id="hvoBody2"></tbody>
       </table>
     </div>
   </div>
@@ -1058,12 +1075,25 @@ function buildPeriodBar() {
   bar.innerHTML = '';
   if (label) bar.appendChild(label);
 
-  var periods = ['Overall'].concat(QUARTERS);
-  periods.forEach(function(p) {
+  // Row 1: OVERALL button
+  var overallBtn = document.createElement('button');
+  overallBtn.className = 'period-btn' + ('Overall' === activePeriod ? ' active' : '');
+  overallBtn.dataset.period = 'Overall';
+  overallBtn.textContent = 'OVERALL';
+  overallBtn.onclick = function() { selectPeriod('Overall'); };
+  bar.appendChild(overallBtn);
+
+  // Flex row-break: forces quarters onto their own line(s)
+  var rowBreak = document.createElement('div');
+  rowBreak.style.cssText = 'flex-basis:100%;height:0;width:100%';
+  bar.appendChild(rowBreak);
+
+  // Row 2+: Quarter buttons (wrap naturally)
+  QUARTERS.forEach(function(p) {
     var btn = document.createElement('button');
     btn.className = 'period-btn' + (p === activePeriod ? ' active' : '');
     btn.dataset.period = p;
-    btn.textContent = p === 'Overall' ? 'OVERALL' : p;
+    btn.textContent = p;
     btn.onclick = function() { selectPeriod(p); };
     bar.appendChild(btn);
   });
@@ -1302,10 +1332,10 @@ function renderHvoTab() {
   document.getElementById('hvoCnt').textContent =
     rows.length + (hvoSearch ? ' / ' + all.length : '') + ' players';
 
-  var tbody = document.getElementById('hvoBody');
-  tbody.innerHTML = rows.map(function(r) {
+  var rowsHtml1 = [], rowsHtml2 = [];
+  rows.forEach(function(r) {
     var rClass = r.roi > 0 ? 'hvo-pos' : r.roi < 0 ? 'hvo-neg' : 'hvo-zero';
-    return '<tr>' +
+    rowsHtml1.push('<tr>' +
       '<td class="hvo-pc">'              + r.player        + '</td>' +
       '<td>'                             + r.h_games       + '</td>' +
       '<td>'                             + r.o_games       + '</td>' +
@@ -1320,6 +1350,9 @@ function renderHvoTab() {
       '<td class="hvo-tot">'             + r.t_itm         + '</td>' +
       '<td class="hvo-gs">'              + pct(r.h_itmpct) + '</td>' +
       '<td>'                             + pct(r.o_itmpct) + '</td>' +
+      '</tr>');
+    rowsHtml2.push('<tr>' +
+      '<td class="hvo-pc">'              + r.player        + '</td>' +
       '<td class="hvo-gs">'              + n(r.h_points)   + '</td>' +
       '<td>'                             + n(r.o_points)   + '</td>' +
       '<td class="hvo-tot">'             + n(r.t_points)   + '</td>' +
@@ -1330,8 +1363,10 @@ function renderHvoTab() {
       '<td>'                             + n(r.o_bounty)   + '</td>' +
       '<td class="hvo-tot">'             + n(r.t_bounty)   + '</td>' +
       '<td class="hvo-gs ' + rClass + '">' + roi(r.roi)   + '</td>' +
-      '</tr>';
-  }).join('');
+      '</tr>');
+  });
+  document.getElementById('hvoBody1').innerHTML = rowsHtml1.join('');
+  document.getElementById('hvoBody2').innerHTML = rowsHtml2.join('');
 
   updateHvoSortHeaders();
 }
