@@ -37,23 +37,21 @@
   .error-code  { background:var(--bg-panel); border:1px solid var(--border); border-radius:4px; padding:12px 16px; font-family:monospace; font-size:.78rem; color:var(--text-dim); max-width:520px; word-break:break-all; margin-top:4px; }
 
   /* ── HEADER ── */
-  header { text-align:center; padding:45px 24px 30px; position:relative; background:linear-gradient(180deg,#0a0c10 0%,var(--bg-dark) 100%); border-bottom:1px solid var(--border-gold); }
+  header { padding:20px 24px; position:relative; background:linear-gradient(180deg,#0a0c10 0%,var(--bg-dark) 100%); border-bottom:1px solid var(--border-gold); display:flex; align-items:center; justify-content:space-between; gap:16px; }
   .rune-border { position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent); }
-  header h1 { font-family:'Cinzel',serif; font-size:clamp(2.25rem,6.25vw,3.75rem); font-weight:900; letter-spacing:.12em; color:var(--gold); text-shadow:0 0 50px rgba(201,168,76,.4),0 2px 4px rgba(0,0,0,.8); }
-  header h2 { font-family:'Cinzel',serif; font-size:clamp(.875rem,2.5vw,1.125rem); font-weight:400; letter-spacing:.3em; color:var(--text-dim); margin-top:10px; }
+  .header-side { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+  .header-center { flex:1; min-width:0; text-align:center; }
+  header h1 { font-family:'Cinzel',serif; font-size:clamp(1.5rem,4.5vw,3.75rem); font-weight:900; letter-spacing:.12em; color:var(--gold); text-shadow:0 0 50px rgba(201,168,76,.4),0 2px 4px rgba(0,0,0,.8); }
+  header h2 { font-family:'Cinzel',serif; font-size:clamp(.75rem,2vw,1.125rem); font-weight:400; letter-spacing:.3em; color:var(--text-dim); margin-top:10px; }
   .header-ornament { font-size:1.375rem; color:var(--gold-dim); letter-spacing:.5em; margin:12px 0 0; }
   .live-badge { display:inline-flex; align-items:center; gap:6px; margin-top:12px; background:rgba(201,168,76,.08); border:1px solid var(--border-gold); border-radius:20px; padding:5px 18px; font-family:'Cinzel',serif; font-size:.79rem; letter-spacing:.2em; color:var(--gold-dim); }
   .live-dot { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
   .updated-time { font-size:.875rem; color:var(--text-muted); margin-top:6px; font-style:italic; }
-  .header-avatar { position:absolute; top:50%; transform:translateY(-50%); width:225px; height:225px; border-radius:50%; border:2px solid var(--gold-dim); object-fit:cover; box-shadow:0 0 22px rgba(201,168,76,.25); }
-  .header-avatar-left  { left:28px; }
-  .header-avatar-right { right:28px; }
-  @media(max-width:700px){ .header-avatar { display:none; } }
-  .header-gif { position:absolute; top:50%; transform:translateY(-50%); width:130px; height:130px; object-fit:cover; border-radius:8px; border:1px solid var(--border-gold); box-shadow:0 0 18px rgba(201,168,76,.18); }
-  .header-gif-left  { left:20%; }
-  .header-gif-right { right:20%; }
-  @media(max-width:1350px){ .header-gif { display:none; } }
+  .header-avatar { width:clamp(70px,11vw,225px); height:clamp(70px,11vw,225px); border-radius:50%; border:2px solid var(--gold-dim); object-fit:cover; box-shadow:0 0 22px rgba(201,168,76,.25); flex-shrink:0; }
+  @media(max-width:600px){ .header-avatar { display:none; } }
+  .header-gif { width:clamp(55px,7vw,130px); height:clamp(55px,7vw,130px); object-fit:cover; border-radius:8px; border:1px solid var(--border-gold); box-shadow:0 0 18px rgba(201,168,76,.18); flex-shrink:0; }
+  @media(max-width:960px){ .header-gif { display:none; } }
 
   /* ── TAB NAV ── */
   .tab-nav { display:flex; flex-direction:column; background:var(--bg-dark); border-bottom:2px solid var(--border-gold); padding:12px 18px; gap:8px; }
@@ -688,18 +686,24 @@
 
 <header>
   <div class="rune-border"></div>
-  <img class="header-avatar header-avatar-left"  src="https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warriors/OIG4B.png" alt="Nordic Warriors">
-  <img class="header-avatar header-avatar-right" src="https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warriors/woman%20warrior.png" alt="Nordic Warriors">
-  <img class="header-gif header-gif-left"  src="https://c.tenor.com/HcU8Sy8f-0oAAAAd/tenor.gif"  alt="Warriors Battle">
-  <img class="header-gif header-gif-right" src="https://c.tenor.com/_7--XEHkn4oAAAAd/tenor.gif" alt="Warriors Battle">
-  <h1>⚔ NORDIC WARRIORS ⚔</h1>
-  <h2>Poker League &nbsp;·&nbsp; Stats &amp; Leaderboards</h2>
-  <div class="header-ornament">⟡ ᚱ ᚢ ᚾ ᛖ ⟡</div>
-  <div class="live-badge"><span class="live-dot"></span> LIVE DATA</div>
-  <button class="refresh-btn" id="refreshBtn"><span class="ri">↻</span> REFRESH</button>
-  <button class="theme-btn"  id="themeBtn"  onclick="toggleTheme()">CHANGE TO LIGHT THEME</button>
-  <div class="updated-time" id="updatedTime"></div>
-  <div class="countdown" id="countdownEl"></div>
+  <div class="header-side header-side-left">
+    <img class="header-avatar" src="https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warriors/OIG4B.png" alt="Nordic Warriors">
+    <img class="header-gif" src="https://c.tenor.com/HcU8Sy8f-0oAAAAd/tenor.gif" alt="Warriors Battle">
+  </div>
+  <div class="header-center">
+    <h1>⚔ NORDIC WARRIORS ⚔</h1>
+    <h2>Poker League &nbsp;·&nbsp; Stats &amp; Leaderboards</h2>
+    <div class="header-ornament">⟡ ᚱ ᚢ ᚾ ᛖ ⟡</div>
+    <div class="live-badge"><span class="live-dot"></span> LIVE DATA</div>
+    <button class="refresh-btn" id="refreshBtn"><span class="ri">↻</span> REFRESH</button>
+    <button class="theme-btn"  id="themeBtn"  onclick="toggleTheme()">CHANGE TO LIGHT THEME</button>
+    <div class="updated-time" id="updatedTime"></div>
+    <div class="countdown" id="countdownEl"></div>
+  </div>
+  <div class="header-side header-side-right">
+    <img class="header-gif" src="https://c.tenor.com/_7--XEHkn4oAAAAd/tenor.gif" alt="Warriors Battle">
+    <img class="header-avatar" src="https://raw.githubusercontent.com/RainsPlace/Avatars/main/Nordic%20Warriors/woman%20warrior.png" alt="Nordic Warriors">
+  </div>
 </header>
 
 <!-- TAB NAVIGATION -->
