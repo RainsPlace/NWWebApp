@@ -148,7 +148,6 @@
   .obar { background:linear-gradient(90deg,#4a2a80,var(--accent-omaha)); }
   .ebar { background:linear-gradient(90deg,var(--gold-dim),var(--gold)); }
   .empty-msg { text-align:center; padding:40px 16px; color:var(--text-muted); font-style:italic; font-size:1.35rem; }
-
   /* ── STAT CARDS (Leaders Tab) ── */
   .leaders-section { padding:20px 16px 40px; }
   .stat-cards-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
@@ -697,6 +696,7 @@
     <div class="live-badge"><span class="live-dot"></span> LIVE DATA</div>
     <button class="refresh-btn" id="refreshBtn"><span class="ri">↻</span> REFRESH</button>
     <button class="theme-btn"  id="themeBtn"  onclick="toggleTheme()">CHANGE TO LIGHT THEME</button>
+    <button class="theme-btn"  id="copyBtn"   onclick="captureTab()">📷 COPY TO CLIPBOARD</button>
     <div class="updated-time" id="updatedTime"></div>
     <div class="countdown" id="countdownEl"></div>
   </div>
@@ -2257,6 +2257,33 @@ function renderChampions(data) {
   el.innerHTML = html;
 }
 
+// ── COPY TO CLIPBOARD (image) ─────────────────────────────────
+function captureTab() {
+  var sectionId = 'section-' + activeTab;
+  var el = document.getElementById(sectionId);
+  if (!el) { alert('Nothing to capture.'); return; }
+  var btn = document.getElementById('copyBtn');
+  if (btn) { btn.textContent = '\u23F3 CAPTURING\u2026'; btn.disabled = true; }
+  html2canvas(el, {
+    backgroundColor: document.body.classList.contains('light') ? '#f4f1eb' : '#0d0f14',
+    scale: 2, useCORS: true, logging: false
+  })
+    .then(function(canvas) {
+      return canvas.toBlob(function(blob) {
+        if (!blob) throw new Error('Canvas to blob failed');
+        return navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+      }, 'image/png');
+    })
+    .then(function() {
+      if (btn) { btn.textContent = '\u2713 COPIED!'; setTimeout(function(){ btn.textContent = '\uD83D\uDCF7 COPY TO CLIPBOARD'; btn.disabled = false; }, 2000); }
+    })
+    .catch(function(err) {
+      console.error('captureTab error:', err);
+      if (btn) { btn.textContent = '\u26A0 FAILED'; setTimeout(function(){ btn.textContent = '\uD83D\uDCF7 COPY TO CLIPBOARD'; btn.disabled = false; }, 2000); }
+      alert('Copy failed: ' + err.message + '\nTry a different browser or check clipboard permissions.');
+    });
+}
+
 // ── THEME TOGGLE ─────────────────────────────────────────────
 function toggleTheme() {
   var isLight = document.body.classList.toggle('light');
@@ -2274,6 +2301,7 @@ function toggleTheme() {
 
 loadData();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <div style="text-align:center; margin-top:30px; padding-bottom:30px;">
   <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Frainsplace.github.io%2FNWWebApp%2F&label=Visits&icon=cloud-drizzle&color=%23198754&message=&style=flat&tz=US%2FEastern" alt="App Visits">
 </div>
