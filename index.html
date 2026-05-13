@@ -2628,16 +2628,46 @@ function populatePRQuarterSelect() {
 }
 
 function prQuarterChange() {
-  PR_PLAYER_SEL = '';
+  var sel     = document.getElementById('pr-quarter-select');
+  var quarter = sel ? sel.value : 'Overall';
+
+  // Pre-fetch this quarter's rows in background regardless
+  if (quarter && quarter !== 'Overall') loadQuarterRows(quarter, null);
+
+  // ── A player is already selected ──────────────────────────────
+  if (PR_PLAYER_SEL) {
+    prHideDropdown();
+    // Overall always includes every player
+    var list          = PR_QUARTER_PLAYERS[quarter] || [];
+    var playerExists  = (quarter === 'Overall') || (list.indexOf(PR_PLAYER_SEL) !== -1);
+
+    if (playerExists) {
+      // Player played this quarter — run the report automatically
+      document.getElementById('pr-run-btn').disabled = false;
+      runPlayerReport();
+    } else {
+      // Player did not play this quarter — keep name, show message
+      document.getElementById('pr-run-btn').disabled = true;
+      var area = document.getElementById('pr-report-area');
+      area.innerHTML =
+        '<div class="pr-empty" style="padding:50px 0;text-align:center">' +
+          '<div style="font-size:1.1rem;color:var(--text-main);margin-bottom:10px">' +
+            '<strong>' + esc(PR_PLAYER_SEL) + '</strong> did not play in <strong>' + esc(quarter) + '</strong>.' +
+          '</div>' +
+          '<div style="font-size:.85rem;color:var(--text-muted)">' +
+            'Select a different quarter, or click the player field to choose a different player.' +
+          '</div>' +
+        '</div>';
+    }
+    return;
+  }
+
+  // ── No player selected yet — reset and show full dropdown ─────
   var inp = document.getElementById('pr-player-input');
   if (inp) inp.value = '';
   document.getElementById('pr-run-btn').disabled = true;
   prHideDropdown();
   updatePRPlayerDropdown('');
-  // Pre-fetch this quarter's rows in background
-  var sel = document.getElementById('pr-quarter-select');
-  var q   = sel ? sel.value : '';
-  if (q && q !== 'Overall') loadQuarterRows(q, null);
 }
 
 function prInputFocus() {
