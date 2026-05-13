@@ -574,10 +574,10 @@
 
   /* ── GAME REVIEW CARDS ── */
   .rv-wrap { padding:12px 16px 40px; }
-  .rv-section-hdr { display:flex; align-items:center; gap:10px; margin:18px 0 8px; padding:9px 14px; background:var(--bg-panel); border-radius:6px; font-family:'Cinzel',serif; font-size:.78rem; letter-spacing:.12em; font-weight:700; text-transform:uppercase; color:var(--text-main); border-left:3px solid var(--gold-dim); }
+  .rv-section-hdr { display:flex; align-items:center; gap:10px; margin:18px 0 8px; padding:9px 14px; background:var(--bg-panel); border-radius:6px; font-family:'Cinzel',serif; font-size:.94rem; letter-spacing:.12em; font-weight:700; text-transform:uppercase; color:var(--text-main); border-left:3px solid var(--gold-dim); }
   .rv-card { background:var(--bg-card); border:1px solid var(--border); border-radius:8px; margin:8px 0; overflow:hidden; }
   .rv-card-header { display:flex; align-items:center; gap:12px; padding:11px 15px; border-bottom:1px solid var(--border); flex-wrap:wrap; }
-  .rv-rank-badge { min-width:54px; text-align:center; padding:6px 10px; border-radius:6px; font-weight:700; font-size:.9rem; color:#fff; font-family:'Cinzel',serif; letter-spacing:.04em; flex-shrink:0; }
+  .rv-rank-badge { min-width:54px; text-align:center; padding:6px 10px; border-radius:6px; font-weight:700; font-size:1.08rem; color:#fff; font-family:'Cinzel',serif; letter-spacing:.04em; flex-shrink:0; }
   .rv-badge-gold   { background:#b8860b; }
   .rv-badge-silver { background:#708090; }
   .rv-badge-bronze { background:#8b4513; }
@@ -585,21 +585,21 @@
   .rv-badge-indigo { background:#1a4a7c; }
   .rv-badge-slate  { background:#3d5166; }
   .rv-badge-purple { background:#7030a0; }
-  .rv-player-name { font-weight:700; font-size:1.05rem; flex:1; color:var(--text-main); min-width:120px; }
-  .rv-champ-badge { background:rgba(184,134,11,.18); color:var(--gold-light); border:1px solid var(--gold-dim); font-family:'Cinzel',serif; font-size:.58rem; padding:2px 8px; border-radius:10px; font-weight:700; letter-spacing:.07em; white-space:nowrap; }
-  .rv-rating-label { font-size:1.05rem; color:var(--text-dim); white-space:nowrap; }
+  .rv-player-name { font-weight:700; font-size:1.26rem; flex:1; color:var(--text-main); min-width:120px; }
+  .rv-champ-badge { background:rgba(184,134,11,.18); color:var(--gold-light); border:1px solid var(--gold-dim); font-family:'Cinzel',serif; font-size:.70rem; padding:2px 8px; border-radius:10px; font-weight:700; letter-spacing:.07em; white-space:nowrap; }
+  .rv-rating-label { font-size:1.26rem; color:var(--text-dim); white-space:nowrap; }
   .rv-stats-row { display:flex; flex-wrap:wrap; border-bottom:1px solid var(--border); }
   .rv-stat { flex:1; min-width:80px; padding:8px 10px; text-align:center; border-right:1px solid var(--border); }
   .rv-stat:last-child { border-right:none; }
-  .rv-stat-label { font-family:'Cinzel',serif; font-size:1rem; color:#a8bcd4; letter-spacing:.07em; text-transform:uppercase; }
-  .rv-stat-val { font-size:1.4rem; font-weight:700; color:#f0ece4; margin-top:2px; }
+  .rv-stat-label { font-family:'Cinzel',serif; font-size:1.2rem; color:#a8bcd4; letter-spacing:.07em; text-transform:uppercase; }
+  .rv-stat-val { font-size:1.68rem; font-weight:700; color:#f0ece4; margin-top:2px; }
   .rv-trend-up  { color:#4caf50; }
   .rv-trend-dn  { color:var(--red); }
   .rv-trend-new { color:var(--accent-holdem); }
-  .rv-narrative { padding:13px 15px; font-size:1.2rem; color:var(--text-dim); line-height:1.7; background:var(--bg-panel); font-style:italic; }
+  .rv-narrative { padding:13px 15px; font-size:1.73rem; color:var(--text-dim); line-height:1.7; background:var(--bg-panel); font-style:italic; }
   .rv-no-data  { text-align:center; padding:60px 20px; color:var(--text-muted); font-style:italic; }
   .rv-loading  { text-align:center; padding:40px 20px; color:var(--text-dim); font-style:italic; }
-  .rv-updated  { text-align:right; padding:4px 16px 0; font-size:.7rem; color:var(--text-muted); font-style:italic; }
+  .rv-updated  { text-align:right; padding:4px 16px 0; font-size:.84rem; color:var(--text-muted); font-style:italic; }
   @media(max-width:480px) { .rv-stat { min-width:68px; } }
 
   /* ── CHAMPIONS TAB ── */
@@ -660,6 +660,151 @@
   .champ-win-name { font-size:.88rem; color:var(--text-main); flex:1; }
   .champ-win-count { font-family:'Cinzel',serif; font-size:.82rem; font-weight:700; color:var(--gold); white-space:nowrap; }
   .champ-loading { text-align:center; padding:60px 20px; color:var(--text-muted); font-style:italic; }
+
+  /* ── SIDEBAR LAYOUT ─────────────────────────────────────────── */
+  .app-layout { display:flex; min-height:0; }
+  .sidebar {
+    width:234px; flex-shrink:0;
+    background:var(--bg-card); border-right:1px solid var(--border);
+    padding:12px 0; display:flex; flex-direction:column; gap:2px;
+    position:sticky; top:0; align-self:flex-start;
+    max-height:calc(100vh - 90px); overflow-y:auto;
+  }
+  .nav-item {
+    display:flex; align-items:center; gap:8px;
+    padding:10px 16px; font-family:'Cinzel',serif; font-size:.73rem; letter-spacing:.05em;
+    color:var(--text-dim); cursor:pointer; border:none; background:none;
+    width:100%; text-align:left; transition:background .15s, color .15s;
+    border-left:3px solid transparent; line-height:1.3;
+  }
+  .nav-item:hover { background:var(--bg-panel); color:var(--text-main); }
+  .nav-item.active { background:var(--bg-panel); color:var(--gold); border-left-color:var(--gold); font-weight:700; }
+  .nav-divider { height:1px; background:var(--border); margin:6px 12px; }
+  .main-content { flex:1; min-width:0; overflow:hidden; padding:0 14px; }
+
+  @media (max-width:700px) {
+    .app-layout { flex-direction:column; }
+    .sidebar {
+      width:100%; flex-direction:row; flex-wrap:wrap; max-height:none;
+      position:relative; padding:6px 4px; gap:3px;
+      border-right:none; border-bottom:1px solid var(--border);
+    }
+    .nav-item {
+      width:auto; flex:0 0 auto; padding:6px 9px; font-size:.68rem;
+      border-left:none; border-bottom:3px solid transparent;
+    }
+    .nav-item.active { border-left-color:transparent; border-bottom-color:var(--gold); }
+    .nav-divider { display:none; }
+    .main-content { padding:0 6px; }
+  }
+
+  /* ── PLAYER REPORT ───────────────────────────────────────────── */
+  .pr-selector-bar {
+    display:inline-flex; flex-wrap:wrap; gap:12px; align-items:flex-end;
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:8px; padding:16px 20px; margin-bottom:20px;
+    max-width:60%;
+  }
+  .pr-field { display:flex; flex-direction:column; gap:5px; flex:0 0 216px; }
+  .pr-field label { font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.08em; color:var(--text-dim); }
+  .pr-input-wrap { position:relative; }
+  .pr-player-input {
+    width:100%; background:var(--bg-panel); border:1px solid var(--border);
+    border-radius:5px; color:var(--text-main); padding:8px 12px; font-size:.88rem;
+    outline:none; box-sizing:border-box;
+  }
+  .pr-player-input:focus { border-color:var(--gold-dim); }
+  .pr-dropdown {
+    position:absolute; top:calc(100% + 3px); left:0; width:100%; z-index:300;
+    background:var(--bg-card); border:1px solid var(--gold-dim); border-radius:5px;
+    max-height:220px; overflow-y:auto; box-shadow:0 6px 20px rgba(0,0,0,.5);
+  }
+  .pr-dropdown-item {
+    padding:8px 14px; font-size:.85rem; color:var(--text-main);
+    cursor:pointer; border-bottom:1px solid var(--border);
+  }
+  .pr-dropdown-item:last-child { border-bottom:none; }
+  .pr-dropdown-item:hover, .pr-dropdown-item.highlighted { background:var(--bg-panel); color:var(--gold); }
+  .pr-select {
+    background:var(--bg-panel); border:1px solid var(--border);
+    border-radius:5px; color:var(--text-main); padding:8px 12px; font-size:.88rem;
+    outline:none; width:100%; min-width:150px;
+  }
+  .pr-btn {
+    background:var(--gold); color:#000; border:none; border-radius:5px;
+    padding:9px 22px; font-family:'Cinzel',serif; font-size:.78rem; font-weight:700;
+    letter-spacing:.06em; cursor:pointer; align-self:flex-end; white-space:nowrap;
+    transition:opacity .15s;
+  }
+  .pr-btn:hover { opacity:.85; }
+  .pr-btn:disabled { opacity:.4; cursor:not-allowed; }
+  .pr-wrap { max-width:900px; margin:0 auto; }
+  .pr-loading { text-align:center; padding:60px; color:var(--text-muted); font-style:italic; }
+  .pr-empty { text-align:center; padding:60px; color:var(--text-dim); }
+  .pr-error { text-align:center; padding:40px; color:#e55; font-style:italic; }
+  .pr-player-header {
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
+    padding:16px 20px; margin-bottom:20px;
+  }
+  .pr-player-name { font-family:'Cinzel',serif; font-size:1.2rem; color:var(--gold); font-weight:700; }
+  .pr-player-period { font-size:.82rem; color:var(--text-dim); margin-top:3px; }
+  .pr-champ-badge {
+    margin-left:auto; background:linear-gradient(135deg,#7a5f00,#c9a227);
+    color:#fff; font-family:'Cinzel',serif; font-size:.72rem; letter-spacing:.07em;
+    padding:5px 12px; border-radius:20px; white-space:nowrap; text-align:center;
+  }
+  .pr-toc-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    background:linear-gradient(135deg,#1a2a4a,#2a3f6f); border:1px solid #4a6fa5;
+    color:#9fc0e8; border-radius:20px; padding:5px 14px;
+    font-size:.78rem; font-family:'Cinzel',serif; letter-spacing:.05em;
+  }
+  .pr-section { margin-bottom:24px; }
+  .pr-section-title {
+    font-family:'Cinzel',serif; font-size:.82rem; letter-spacing:.1em;
+    color:var(--gold-dim); text-transform:uppercase; border-bottom:1px solid var(--border);
+    padding-bottom:8px; margin-bottom:14px;
+  }
+  .pr-stats-grid { display:flex; flex-wrap:wrap; gap:10px; }
+  .pr-stat-card {
+    background:var(--bg-card); border:1px solid var(--border); border-radius:7px;
+    padding:12px 16px; min-width:120px; flex:1;
+  }
+  .pr-stat-label { font-size:.7rem; color:var(--text-dim); font-family:'Cinzel',serif; letter-spacing:.05em; margin-bottom:4px; }
+  .pr-stat-value { font-size:1.25rem; color:var(--text-main); font-weight:700; }
+  .pr-stat-sub { font-size:.7rem; color:var(--text-muted); margin-top:2px; }
+  .pr-stat-gold .pr-stat-value { color:var(--gold); }
+  .pr-stat-green .pr-stat-value { color:#4caf50; }
+  .pr-stat-red .pr-stat-value { color:#e55; }
+  .pr-lb-row {
+    display:flex; align-items:center; gap:10px; padding:7px 12px;
+    border-radius:5px; margin-bottom:4px; background:var(--bg-card); border:1px solid var(--border);
+  }
+  .pr-lb-rank { font-family:'Cinzel',serif; font-size:.73rem; color:var(--text-dim); min-width:26px; }
+  .pr-lb-rank-1 { color:var(--gold); }
+  .pr-lb-rank-2 { color:#aaa; }
+  .pr-lb-rank-3 { color:#cd7f32; }
+  .pr-lb-label { flex:1; font-size:.85rem; color:var(--text-main); }
+  .pr-lb-pts { font-size:.82rem; color:var(--gold-dim); font-family:'Cinzel',serif; }
+  .pr-lb-highlight { border-color:var(--gold-dim); background:var(--bg-panel); }
+  .pr-skill-wrap { margin-bottom:10px; }
+  .pr-skill-label { font-size:.77rem; color:var(--text-dim); margin-bottom:4px; display:flex; justify-content:space-between; }
+  .pr-skill-track { background:var(--bg-panel); border-radius:4px; height:8px; overflow:hidden; }
+  .pr-skill-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#7a5f00,var(--gold)); }
+  .pr-hvo-table { width:100%; border-collapse:collapse; font-size:.82rem; }
+  .pr-hvo-table th { font-family:'Cinzel',serif; font-size:.68rem; letter-spacing:.05em; color:var(--text-dim); text-align:right; padding:6px 8px; border-bottom:1px solid var(--border); }
+  .pr-hvo-table th:first-child { text-align:left; }
+  .pr-hvo-table td { padding:7px 8px; text-align:right; border-bottom:1px solid var(--border); color:var(--text-main); }
+  .pr-hvo-table td:first-child { text-align:left; font-family:'Cinzel',serif; font-size:.73rem; color:var(--text-dim); }
+  .pr-hvo-table tr.pr-total td { border-bottom:none; font-weight:700; color:var(--gold-dim); }
+  .pr-hist-wrap { max-height:380px; overflow-y:auto; border:1px solid var(--border); border-radius:6px; }
+  .pr-hist-table { width:100%; border-collapse:collapse; font-size:.79rem; }
+  .pr-hist-table th { font-family:'Cinzel',serif; font-size:.67rem; color:var(--text-dim); letter-spacing:.03em; padding:5px 8px; border-bottom:1px solid var(--border); text-align:right; background:var(--bg-card); position:sticky; top:0; z-index:1; }
+  .pr-hist-table th:first-child { text-align:left; }
+  .pr-hist-table td { padding:5px 8px; text-align:right; border-bottom:1px solid var(--border); color:var(--text-main); }
+  .pr-hist-table td:first-child { text-align:left; color:var(--text-dim); }
+  .pr-hist-table tr.pr-hist-win td { color:var(--gold); }
 </style>
 </head>
 <body>
@@ -706,20 +851,21 @@
   </div>
 </header>
 
-<!-- TAB NAVIGATION -->
-<div class="tab-nav">
-  <div class="tab-row">
-    <button class="tab-btn" id="tab-leaderboard" onclick="switchTab('leaderboard')">⚔ LEADERBOARD</button>
-    <button class="tab-btn" id="tab-leaders" onclick="switchTab('leaders')">★ LEADERS</button>
-    <button class="tab-btn" id="tab-hvo" onclick="switchTab('hvo')">♠♦ HOLDEM vs OMAHA</button>
-    <button class="tab-btn" id="tab-calendar" onclick="switchTab('calendar')">📅 CALENDAR</button>
-  </div>
-  <div class="tab-row">
-    <button class="tab-btn active" id="tab-results"     onclick="switchTab('results')">🏆 LATEST GAME RESULTS</button>
-    <button class="tab-btn"        id="tab-gamereview"  onclick="switchTab('gamereview')">🎖 LATEST GAME REVIEW</button>
-    <button class="tab-btn"        id="tab-champions"   onclick="switchTab('champions')">♛ CHAMPIONS</button>
-  </div>
-</div>
+<!-- APP LAYOUT: sidebar + main content -->
+<div class="app-layout">
+<nav class="sidebar">
+  <button class="nav-item" id="nav-leaderboard" onclick="switchTab('leaderboard')">⚔ LEADERBOARD</button>
+  <button class="nav-item" id="nav-leaders"     onclick="switchTab('leaders')">★ LEADERS</button>
+  <button class="nav-item" id="nav-hvo"         onclick="switchTab('hvo')">♠♦ HOLDEM vs OMAHA</button>
+  <button class="nav-item" id="nav-calendar"    onclick="switchTab('calendar')">📅 CALENDAR</button>
+  <div class="nav-divider"></div>
+  <button class="nav-item active" id="nav-results"     onclick="switchTab('results')">🏆 LATEST GAME RESULTS</button>
+  <button class="nav-item"        id="nav-gamereview"  onclick="switchTab('gamereview')">🎖 LATEST GAME REVIEW</button>
+  <button class="nav-item"        id="nav-champions"   onclick="switchTab('champions')">♛ CHAMPIONS</button>
+  <div class="nav-divider"></div>
+  <button class="nav-item" id="nav-playerreport" onclick="switchTab('playerreport')">🃏 PLAYER REPORT</button>
+</nav>
+<div class="main-content">
 
 <!-- LEADERBOARD CONTROLS (hidden on other tabs) -->
 <div id="ctrl-leaderboard" class="controls" style="display:none">
@@ -996,6 +1142,35 @@
   </div>
 </div><!-- end section-champions -->
 
+<!-- ══ PLAYER REPORT SECTION ══ -->
+<div id="section-playerreport" style="display:none">
+  <!-- Selector bar -->
+  <div class="pr-selector-bar">
+    <div class="pr-field">
+      <label>QUARTER</label>
+      <select id="pr-quarter-select" class="pr-select" onchange="prQuarterChange()"></select>
+    </div>
+    <div class="pr-field">
+      <label>PLAYER</label>
+      <div class="pr-input-wrap">
+        <input type="text" id="pr-player-input" class="pr-player-input" placeholder="Click or type to search…"
+          oninput="prInputKeyUp()" onfocus="prInputFocus()" onblur="prInputBlur()" autocomplete="off" spellcheck="false">
+        <div id="pr-dropdown" class="pr-dropdown" style="display:none"></div>
+      </div>
+    </div>
+    <button class="pr-btn" id="pr-run-btn" onclick="runPlayerReport()" disabled>VIEW REPORT</button>
+  </div>
+  <!-- Report content area -->
+  <div id="pr-report-area" class="pr-wrap">
+    <div class="pr-empty" style="padding:60px 0;color:var(--text-dim)">
+      Select a quarter and player, then click <strong>VIEW REPORT</strong>.
+    </div>
+  </div>
+</div><!-- end section-playerreport -->
+
+</div><!-- end main-content -->
+</div><!-- end app-layout -->
+
 <footer>
   <span class="fr">⟡ ᚾ ᚩ ᚱ ᛞ ᛁ ᚳ ⟡</span>
   Nordic Warriors Poker League &nbsp;·&nbsp; Live data from Google Sheets
@@ -1044,6 +1219,17 @@ var CHAMPIONS_DATA  = null;
 var championsLoaded = false; // lazy-loaded when Champions tab clicked
 var LS_CHAMPIONS    = 'nw_champions_v1';
 var LS_CHAMP_GEN    = 'nw_champ_gen_v1';
+
+// ── PLAYER REPORT STATE ───────────────────────────────────────
+var PR_PLAYERS_LOADED  = false;
+var PR_QUARTER_PLAYERS = {};  // { 'Q1 2026': [names], 'Overall': [names] }
+var PR_QUARTERS        = [];  // quarter list newest-first
+var PR_PLAYER_SEL      = '';  // currently confirmed player name
+var PR_QUARTER_ROWS    = {};  // { 'Q1 2026': { playerName: [rows] } } — loaded per quarter
+var PR_QR_LOADING      = {};  // quarters currently being fetched
+var PR_QR_WAITERS      = {};  // callbacks waiting for a quarter fetch
+var LS_PR_PLAYERS      = 'nw_pr_players_v4';
+var LS_PR_PLAYERS_GEN  = 'nw_pr_players_gen_v4';
 
 // Leaderboard sort/search
 var sortState   = { holdem:{col:'rank',asc:true}, omaha:{col:'rank',asc:true}, overall:{col:'rank',asc:true} };
@@ -1273,18 +1459,19 @@ function showError(msg) {
 // ── TAB SWITCHING ─────────────────────────────────────────────
 function switchTab(tab) {
   activeTab = tab;
-  ['leaderboard','leaders','hvo','calendar','results','gamereview','champions'].forEach(function(t) {
-    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  ['leaderboard','leaders','hvo','calendar','results','gamereview','champions','playerreport'].forEach(function(t) {
+    document.getElementById('nav-' + t).classList.toggle('active', t === tab);
     document.getElementById('section-' + t).style.display = (t === tab) ? '' : 'none';
   });
   document.getElementById('ctrl-leaderboard').style.display = tab === 'leaderboard' ? '' : 'none';
   document.getElementById('period-bar').style.display = (tab === 'leaders' || tab === 'hvo') ? '' : 'none';
-  if (tab === 'leaders')    { ensureStats(renderLeadersTab); }
-  if (tab === 'hvo')        { ensureStats(renderHvoTab); }
-  if (tab === 'calendar')   renderCalTab();
-  if (tab === 'results')    renderLatestGame();
-  if (tab === 'gamereview') { if (!reviewLoaded) loadReview(); }
-  if (tab === 'champions')  { if (!championsLoaded) loadChampions(); else renderChampions(CHAMPIONS_DATA); }
+  if (tab === 'leaders')      { ensureStats(renderLeadersTab); }
+  if (tab === 'hvo')          { ensureStats(renderHvoTab); }
+  if (tab === 'calendar')     renderCalTab();
+  if (tab === 'results')      renderLatestGame();
+  if (tab === 'gamereview')   { if (!reviewLoaded) loadReview(); }
+  if (tab === 'champions')    { if (!championsLoaded) loadChampions(); else renderChampions(CHAMPIONS_DATA); }
+  if (tab === 'playerreport') { if (!PR_PLAYERS_LOADED) loadPlayerList(); }
 }
 
 // ── PERIOD BAR ────────────────────────────────────────────────
@@ -2290,6 +2477,638 @@ function toggleTheme() {
   var btn = document.getElementById('themeBtn');
   if (btn) btn.textContent = isLight ? 'CHANGE TO DARK THEME' : 'CHANGE TO LIGHT THEME';
   try { localStorage.setItem('nw_theme', isLight ? 'light' : 'dark'); } catch(e) {}
+}
+
+// ════════════════════════════════════════════════════════════════
+//  PLAYER REPORT
+// ════════════════════════════════════════════════════════════════
+
+// ── Load quarter rows (cached per quarter) ─────────────────────
+// Fetches ALL players' rows for a quarter in one request, caches locally.
+// Calls callback(quarterData) when ready — instant if already cached.
+function loadQuarterRows(quarter, callback) {
+  if (!quarter || quarter === 'Overall') {
+    if (callback) callback(null);
+    return;
+  }
+
+  // Already in memory
+  if (PR_QUARTER_ROWS[quarter]) {
+    if (callback) callback(PR_QUARTER_ROWS[quarter]);
+    return;
+  }
+
+  // Try localStorage
+  var lsKey = 'nw_qr_' + quarter.replace(/\s/g,'');
+  var lsGen = lsKey + '_gen';
+  try {
+    var gen = localStorage.getItem(lsGen);
+    var raw = localStorage.getItem(lsKey);
+    if (gen && raw && (Date.now() - parseInt(gen)) < 30 * 60 * 1000) {
+      var cached = JSON.parse(raw);
+      if (cached && cached.rows) {
+        PR_QUARTER_ROWS[quarter] = cached;
+        if (callback) callback(cached);
+        return;
+      }
+    }
+  } catch(e) {}
+
+  // Queue callback if already fetching
+  if (PR_QR_LOADING[quarter]) {
+    if (!PR_QR_WAITERS[quarter]) PR_QR_WAITERS[quarter] = [];
+    if (callback) PR_QR_WAITERS[quarter].push(callback);
+    return;
+  }
+
+  PR_QR_LOADING[quarter] = true;
+  if (callback) {
+    if (!PR_QR_WAITERS[quarter]) PR_QR_WAITERS[quarter] = [];
+    PR_QR_WAITERS[quarter].push(callback);
+  }
+
+  fetch(WEBAPP_URL + '?get=quarterrows&quarter=' + encodeURIComponent(quarter) + '&_=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      delete PR_QR_LOADING[quarter];
+      if (d && d.rows) {
+        PR_QUARTER_ROWS[quarter] = d;
+        try {
+          localStorage.setItem(lsKey, JSON.stringify(d));
+          localStorage.setItem(lsGen, Date.now().toString());
+        } catch(e) {}
+      }
+      var waiters = PR_QR_WAITERS[quarter] || [];
+      delete PR_QR_WAITERS[quarter];
+      waiters.forEach(function(cb) { cb(d && d.rows ? d : null); });
+    })
+    .catch(function(err) {
+      console.error('loadQuarterRows error (' + quarter + '):', err);
+      delete PR_QR_LOADING[quarter];
+      var waiters = PR_QR_WAITERS[quarter] || [];
+      delete PR_QR_WAITERS[quarter];
+      waiters.forEach(function(cb) { cb(null); });
+    });
+}
+
+// Load all quarters in parallel (needed for Overall view)
+function loadAllQuarterRows(callback) {
+  var total  = PR_QUARTERS.length;
+  if (total === 0) { if (callback) callback(); return; }
+  var done = 0;
+  PR_QUARTERS.forEach(function(q) {
+    loadQuarterRows(q, function() {
+      done++;
+      if (done === total && callback) callback();
+    });
+  });
+}
+
+// ── Load players list (lazy, called on first tab visit) ────────
+function loadPlayerList() {
+  try {
+    var gen = localStorage.getItem(LS_PR_PLAYERS_GEN);
+    var raw = localStorage.getItem(LS_PR_PLAYERS);
+    if (gen && raw && (Date.now() - parseInt(gen)) < 30 * 60 * 1000) {
+      var cached = JSON.parse(raw);
+      if (cached && cached.players) {
+        PR_QUARTER_PLAYERS = cached.players;
+        PR_QUARTERS        = cached.quarters || [];
+        PR_PLAYERS_LOADED  = true;
+        populatePRQuarterSelect();
+        return;
+      }
+    }
+  } catch(e) {}
+
+  fetch(WEBAPP_URL + '?get=players&_=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d || !d.players) return;
+      PR_QUARTER_PLAYERS = d.players;
+      PR_QUARTERS        = d.quarters || [];
+      PR_PLAYERS_LOADED  = true;
+      try {
+        localStorage.setItem(LS_PR_PLAYERS,     JSON.stringify(d));
+        localStorage.setItem(LS_PR_PLAYERS_GEN, Date.now().toString());
+      } catch(e) {}
+      populatePRQuarterSelect();
+    })
+    .catch(function(err) { console.error('loadPlayerList error:', err); });
+}
+
+function populatePRQuarterSelect() {
+  var sel = document.getElementById('pr-quarter-select');
+  if (!sel) return;
+  sel.innerHTML = '';
+  var optAll = document.createElement('option');
+  optAll.value = 'Overall';
+  optAll.textContent = 'All Time (Overall)';
+  sel.appendChild(optAll);
+  PR_QUARTERS.forEach(function(q) {
+    var o = document.createElement('option');
+    o.value = q; o.textContent = q;
+    sel.appendChild(o);
+  });
+  if (PR_QUARTERS.length > 0) sel.value = PR_QUARTERS[0];
+
+  // Build Overall list client-side by merging all quarters, in case the
+  // server payload is missing or stale for that key.
+  if (!PR_QUARTER_PLAYERS['Overall'] || PR_QUARTER_PLAYERS['Overall'].length === 0) {
+    var allSet = {};
+    PR_QUARTERS.forEach(function(q) {
+      (PR_QUARTER_PLAYERS[q] || []).forEach(function(p) { allSet[p] = true; });
+    });
+    PR_QUARTER_PLAYERS['Overall'] = Object.keys(allSet).sort();
+  }
+
+  // Pre-fetch current quarter rows in background so first report is instant
+  if (PR_QUARTERS.length > 0) loadQuarterRows(PR_QUARTERS[0], null);
+  updatePRPlayerDropdown('');
+}
+
+function prQuarterChange() {
+  PR_PLAYER_SEL = '';
+  var inp = document.getElementById('pr-player-input');
+  if (inp) inp.value = '';
+  document.getElementById('pr-run-btn').disabled = true;
+  prHideDropdown();
+  updatePRPlayerDropdown('');
+  // Pre-fetch this quarter's rows in background
+  var sel = document.getElementById('pr-quarter-select');
+  var q   = sel ? sel.value : '';
+  if (q && q !== 'Overall') loadQuarterRows(q, null);
+}
+
+function prInputFocus() {
+  var inp = document.getElementById('pr-player-input');
+  // If the user is re-focusing after having already selected a player,
+  // clear the box so they can type a new search from scratch.
+  if (inp && PR_PLAYER_SEL && inp.value === PR_PLAYER_SEL) {
+    inp.value = '';
+    PR_PLAYER_SEL = '';
+    document.getElementById('pr-run-btn').disabled = true;
+  }
+  updatePRPlayerDropdown(inp ? inp.value.trim() : '');
+}
+
+function prInputKeyUp() {
+  var inp = document.getElementById('pr-player-input');
+  var val = inp ? inp.value.trim() : '';
+  PR_PLAYER_SEL = '';
+  document.getElementById('pr-run-btn').disabled = true;
+  updatePRPlayerDropdown(val);
+}
+
+function updatePRPlayerDropdown(filter) {
+  var sel     = document.getElementById('pr-quarter-select');
+  var quarter = sel ? sel.value : 'Overall';
+  var list    = (PR_QUARTER_PLAYERS[quarter] || []);
+  var fl      = filter.toLowerCase();
+  var matches = fl ? list.filter(function(n) { return n.toLowerCase().indexOf(fl) !== -1; }) : list;
+
+  var dd = document.getElementById('pr-dropdown');
+  if (!dd) return;
+  if (!matches.length) { dd.style.display = 'none'; return; }
+
+  // Sort: _ or - prefixed names first, then case-insensitive alpha
+  matches.sort(function(a, b) {
+    var ak = /^[_\-]/.test(a) ? '\x00' + a.toLowerCase() : a.toLowerCase();
+    var bk = /^[_\-]/.test(b) ? '\x00' + b.toLowerCase() : b.toLowerCase();
+    return ak < bk ? -1 : ak > bk ? 1 : 0;
+  });
+
+  dd.innerHTML = '';
+  var frag = document.createDocumentFragment();
+  matches.forEach(function(name) {
+    var div = document.createElement('div');
+    div.className = 'pr-dropdown-item';
+    div.textContent = name;
+    div.onmousedown = function(ev) { ev.preventDefault(); prSelectPlayer(name); };
+    frag.appendChild(div);
+  });
+  dd.appendChild(frag);
+  dd.style.display = 'block';
+}
+
+function prSelectPlayer(name) {
+  PR_PLAYER_SEL = name;
+  var inp = document.getElementById('pr-player-input');
+  if (inp) inp.value = name;
+  prHideDropdown();
+  document.getElementById('pr-run-btn').disabled = false;
+}
+
+function prInputBlur() { setTimeout(prHideDropdown, 180); }
+
+function prHideDropdown() {
+  var dd = document.getElementById('pr-dropdown');
+  if (dd) dd.style.display = 'none';
+}
+
+// ── Run the report — all data from local cache, no server hit ──
+function runPlayerReport() {
+  if (!PR_PLAYER_SEL) return;
+  var sel     = document.getElementById('pr-quarter-select');
+  var quarter = sel ? sel.value : 'Overall';
+  var area    = document.getElementById('pr-report-area');
+  area.innerHTML = '<div class="pr-loading">Loading…</div>';
+
+  if (quarter === 'Overall') {
+    // Need all quarters loaded — pre-fetches run in parallel
+    area.innerHTML = '<div class="pr-loading">Loading all-time data for ' + esc(PR_PLAYER_SEL) + '…</div>';
+    loadAllQuarterRows(function() {
+      var combinedRows = [];
+      PR_QUARTERS.forEach(function(q) {
+        var qd = PR_QUARTER_ROWS[q];
+        if (qd && qd.rows && qd.rows[PR_PLAYER_SEL]) {
+          qd.rows[PR_PLAYER_SEL].forEach(function(r) {
+            combinedRows.push({ date:r.date, game:r.game, quarter:q, rank:r.rank,
+                                np:r.np, points:r.points, chips:r.chips, bounty:r.bounty });
+          });
+        }
+      });
+      combinedRows.sort(function(a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+      var tocQSet = {};
+      combinedRows.forEach(function(r) { if (r.rank === 1) tocQSet[r.quarter] = true; });
+      var tocQQ = Object.keys(tocQSet).sort(function(a, b) {
+        var ya=parseInt(a.slice(3)),qa=parseInt(a[1]),yb=parseInt(b.slice(3)),qb=parseInt(b[1]);
+        return yb!==ya ? yb-ya : qb-qa;
+      });
+      prRenderReport({ player:PR_PLAYER_SEL, quarter:'Overall', rows:combinedRows, tocQualifiedQuarters:tocQQ });
+    });
+  } else {
+    loadQuarterRows(quarter, function(qd) {
+      var rawRows = (qd && qd.rows && qd.rows[PR_PLAYER_SEL]) ? qd.rows[PR_PLAYER_SEL] : [];
+      var rows    = rawRows.map(function(r) {
+        return { date:r.date, game:r.game, quarter:quarter, rank:r.rank,
+                 np:r.np, points:r.points, chips:r.chips, bounty:r.bounty };
+      });
+      var tocQQ = rows.some(function(r) { return r.rank === 1; }) ? [quarter] : [];
+      prRenderReport({ player:PR_PLAYER_SEL, quarter:quarter, rows:rows, tocQualifiedQuarters:tocQQ });
+    });
+  }
+}
+
+// ── Main report renderer ───────────────────────────────────────
+function prRenderReport(d) {
+  var area    = document.getElementById('pr-report-area');
+  var rows    = d.rows || [];
+  var player  = d.player;
+  var period  = d.quarter || 'Overall';
+  var tocQualifiedQuarters = d.tocQualifiedQuarters || [];
+
+  if (!rows.length) {
+    area.innerHTML = '<div class="pr-empty">No tournament data found for <strong>' +
+      esc(player) + '</strong>' + (period !== 'Overall' ? ' in ' + esc(period) : '') + '.</div>';
+    return;
+  }
+
+  // ── Compute derived stats from raw rows ─────────────────────
+  var h = { games:0, wins:0, itm:0, points:0, chips:0, bounty:0, ftCount:0 };
+  var o = { games:0, wins:0, itm:0, points:0, chips:0, bounty:0, ftCount:0 };
+
+  rows.forEach(function(r) {
+    var g = (r.game === 'holdem') ? h : o;
+    g.games++;
+    if (r.rank === 1) g.wins++;
+    if (r.chips > 0)  g.itm++;
+    if (r.rank <= 5)  g.ftCount++;
+    g.points += r.points;
+    g.chips  += r.chips;
+    g.bounty += r.bounty;
+  });
+
+  var t = {
+    games:   h.games + o.games,
+    wins:    h.wins  + o.wins,
+    itm:     h.itm   + o.itm,
+    ftCount: h.ftCount + o.ftCount,
+    points:  h.points + o.points,
+    chips:   h.chips  + o.chips,
+    bounty:  h.bounty + o.bounty
+  };
+  t.roi = t.chips + t.bounty - t.games * BUY_IN;
+
+  // ── Look up leaderboard standings ───────────────────────────
+  var lbPositions = {};
+  if (period === 'Overall') {
+    QUARTERS.forEach(function(q) {
+      prGetLBRanks(player, q, lbPositions);
+    });
+  } else {
+    prGetLBRanks(player, period, lbPositions);
+  }
+
+  // ── Champion info from CHAMPIONS_DATA ───────────────────────
+  var champInfo  = null;
+  var champTotal = 0;
+  var isPastChamp = false;
+  if (CHAMPIONS_DATA && CHAMPIONS_DATA.playerChampionships) {
+    CHAMPIONS_DATA.playerChampionships.forEach(function(c) {
+      if (c.player === player) { champInfo = c; champTotal = c.total; }
+    });
+  }
+  isPastChamp = champTotal > 0;
+
+  // ── Skill ratings vs all players in same period ─────────────
+  var skillRatings = prComputeSkill(player, period, rows);
+
+  // ── Quarters the player participated in ─────────────────────
+  var playerQuarters = {};
+  rows.forEach(function(r) { playerQuarters[r.quarter] = true; });
+  var pqList = Object.keys(playerQuarters).sort(function(a, b) {
+    var ya = parseInt(a.slice(3)), qa = parseInt(a[1]);
+    var yb = parseInt(b.slice(3)), qb = parseInt(b[1]);
+    return yb !== ya ? yb - ya : qb - qa;
+  });
+
+  // ── Build HTML ───────────────────────────────────────────────
+  var html = '';
+
+  // ── TOC qualification for the current period ─────────────────
+  // In a single-quarter view: did they win a game this quarter?
+  // In Overall view: list all quarters where they won ≥ 1 game.
+  var tocQualThisPeriod = false;
+  if (period !== 'Overall') {
+    tocQualThisPeriod = (tocQualifiedQuarters.indexOf(period) !== -1);
+  }
+
+  // Header
+  html += '<div class="pr-player-header">';
+  html += '<div><div class="pr-player-name">🃏 ' + esc(player) + '</div>';
+  html += '<div class="pr-player-period">' + (period === 'Overall' ? 'All-Time Report' : period + ' Report') + '</div>';
+  // TOC badge in header (single-quarter view only)
+  if (period !== 'Overall') {
+    if (tocQualThisPeriod) {
+      html += '<div style="margin-top:8px"><span class="pr-toc-badge">🏅 TOC Qualified — ' + esc(period) + '</span></div>';
+    } else if (isPastChamp) {
+      html += '<div style="margin-top:8px"><span class="pr-toc-badge">🏅 TOC Auto-Qualified (Past Champion)</span></div>';
+    }
+  } else if (isPastChamp) {
+    html += '<div style="margin-top:8px"><span class="pr-toc-badge">🏅 TOC Auto-Qualifies (Past Champion)</span></div>';
+  }
+  html += '</div>';
+  if (champTotal > 0) {
+    var cLabel = champTotal === 1 ? '1 Quarter Championship' : champTotal + ' Quarter Championships';
+    html += '<div class="pr-champ-badge">♛ ' + cLabel + '</div>';
+  }
+  html += '</div>';
+
+  // ── Overall Stats ───────────────────────────────────────────
+  html += '<div class="pr-section"><div class="pr-section-title">Overall Performance</div>';
+  html += '<div class="pr-stats-grid">';
+  html += prStat('Games Played', t.games, '', '');
+  html += prStat('Wins', t.wins, t.games ? pct(t.wins / t.games) : '—', 'pr-stat-gold');
+  html += prStat('In the Money', t.itm, t.games ? pct(t.itm / t.games) : '—', t.itm / t.games >= 0.4 ? 'pr-stat-green' : '');
+  html += prStat('Final Tables', t.ftCount, t.games ? pct(t.ftCount / t.games) : '—', '');
+  html += prStat('Total Points', Math.round(t.points).toLocaleString(), t.games ? (t.points / t.games).toFixed(1) + ' avg' : '', 'pr-stat-gold');
+  html += prStat('Prize Chips', t.chips.toLocaleString(), '', '');
+  if (t.bounty > 0) html += prStat('Bounty Chips', t.bounty.toLocaleString(), '', '');
+  html += prStat('ROI', (t.roi >= 0 ? '+' : '') + t.roi.toLocaleString(), '', t.roi >= 0 ? 'pr-stat-green' : 'pr-stat-red');
+  html += '</div></div>';
+
+  // ── Hold'em vs Omaha ─────────────────────────────────────────
+  if (h.games > 0 && o.games > 0) {
+    html += '<div class="pr-section"><div class="pr-section-title">Hold\'em vs Omaha Hi/Lo</div>';
+    html += '<table class="pr-hvo-table"><thead><tr>';
+    html += '<th>Game</th><th>Games</th><th>Wins</th><th>ITM</th><th>ITM%</th><th>Points</th><th>Avg Pts</th><th>Chips</th><th>ROI</th>';
+    html += '</tr></thead><tbody>';
+    html += prHvoRow('Hold\'em',      h);
+    html += prHvoRow('Omaha Hi/Lo',   o);
+    html += prHvoRow('Total',         t, true);
+    html += '</tbody></table></div>';
+  }
+
+  // ── Leaderboard Standings ────────────────────────────────────
+  if (Object.keys(lbPositions).length > 0) {
+    html += '<div class="pr-section"><div class="pr-section-title">Leaderboard Standings</div>';
+    Object.keys(lbPositions).sort(function(a, b) {
+      // sort by quarter desc
+      var pa = a.split('|'), pb = b.split('|');
+      var qa = pa[0], qb = pb[0];
+      var ya = parseInt(qa.slice(3)), na = parseInt(qa[1]);
+      var yb = parseInt(qb.slice(3)), nb = parseInt(qb[1]);
+      return yb !== ya ? yb - ya : nb - na;
+    }).forEach(function(key) {
+      var lb = lbPositions[key];
+      var rkClass = lb.rank === 1 ? 'pr-lb-rank-1' : lb.rank === 2 ? 'pr-lb-rank-2' : lb.rank === 3 ? 'pr-lb-rank-3' : '';
+      var isHL = lb.rank <= 3;
+      html += '<div class="pr-lb-row' + (isHL ? ' pr-lb-highlight' : '') + '">';
+      html += '<span class="pr-lb-rank ' + rkClass + '">#' + lb.rank + '</span>';
+      html += '<span class="pr-lb-label">' + esc(lb.q) + ' · ' + esc(lb.cat) + '</span>';
+      html += '<span class="pr-lb-pts">' + Math.round(lb.pts).toLocaleString() + ' pts</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // ── Skill Ratings ────────────────────────────────────────────
+  if (skillRatings.length > 0) {
+    html += '<div class="pr-section"><div class="pr-section-title">Skill Ratings vs Field</div>';
+    skillRatings.forEach(function(sr) {
+      html += '<div class="pr-skill-wrap">';
+      html += '<div class="pr-skill-label"><span>' + esc(sr.label) + '</span><span>' + sr.pctText + '</span></div>';
+      html += '<div class="pr-skill-track"><div class="pr-skill-fill" style="width:' + sr.pct.toFixed(1) + '%"></div></div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // ── TOC Qualifications ───────────────────────────────────────
+  // Show: quarters earned by winning a game + auto-qualify badge if past champion
+  if (tocQualifiedQuarters.length > 0 || isPastChamp) {
+    html += '<div class="pr-section"><div class="pr-section-title">Tournament of Champions</div>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start">';
+
+    if (isPastChamp) {
+      html += '<div style="width:100%;margin-bottom:4px">' +
+        '<span class="pr-toc-badge" style="font-size:.8rem">🏅 Past Quarter Champion — Auto-Qualifies for All Future TOC Tournaments</span>' +
+        '</div>';
+    }
+
+    if (tocQualifiedQuarters.length > 0) {
+      var tocLabel = tocQualifiedQuarters.length === 1
+        ? 'TOC Qualified in ' + tocQualifiedQuarters.length + ' Quarter'
+        : 'TOC Qualified in ' + tocQualifiedQuarters.length + ' Quarters';
+      html += '<div style="width:100%;font-size:.8rem;color:var(--text-dim);margin-bottom:6px">' + tocLabel + ' (won ≥ 1 game):</div>';
+      tocQualifiedQuarters.forEach(function(q) {
+        html += '<span class="pr-toc-badge">🏅 ' + esc(q) + '</span>';
+      });
+    } else if (!isPastChamp) {
+      html += '<div style="font-size:.82rem;color:var(--text-dim);font-style:italic">No TOC qualifications — win a game in any quarter to qualify.</div>';
+    }
+
+    html += '</div></div>';
+  }
+
+  // ── Quarter Champion Badges ───────────────────────────────────
+  if (champInfo && CHAMPIONS_DATA && CHAMPIONS_DATA.quarterChampions) {
+    var wonList = CHAMPIONS_DATA.quarterChampions.filter(function(c) { return c.champ === player; });
+    if (wonList.length > 0) {
+      html += '<div class="pr-section"><div class="pr-section-title">Quarter Championships</div>';
+      html += '<div class="pr-stats-grid">';
+      wonList.forEach(function(c) {
+        html += '<div class="pr-stat-card pr-stat-gold">';
+        html += '<div class="pr-stat-label">♛ ' + esc(c.category) + '</div>';
+        html += '<div class="pr-stat-value" style="font-size:.95rem">' + esc(c.quarter) + '</div>';
+        html += '</div>';
+      });
+      html += '</div></div>';
+    }
+  }
+
+  // ── Per-Quarter Breakdown (All Time only) ────────────────────
+  if (period === 'Overall' && pqList.length > 1) {
+    html += '<div class="pr-section"><div class="pr-section-title">Quarter-by-Quarter Breakdown</div>';
+    pqList.forEach(function(q) {
+      var qRows = rows.filter(function(r) { return r.quarter === q; });
+      var qh = { games:0, wins:0, itm:0, points:0, chips:0, bounty:0 };
+      var qo = { games:0, wins:0, itm:0, points:0, chips:0, bounty:0 };
+      qRows.forEach(function(r) {
+        var g = r.game === 'holdem' ? qh : qo;
+        g.games++; if(r.rank===1)g.wins++; if(r.chips>0)g.itm++;
+        g.points+=r.points; g.chips+=r.chips; g.bounty+=r.bounty;
+      });
+      var qt = { games: qh.games+qo.games, wins: qh.wins+qo.wins, itm: qh.itm+qo.itm,
+                 points: qh.points+qo.points, chips: qh.chips+qo.chips, bounty: qh.bounty+qo.bounty };
+      qt.roi = qt.chips + qt.bounty - qt.games * BUY_IN;
+      html += '<div style="margin-bottom:14px">';
+      html += '<div style="font-family:\'Cinzel\',serif;font-size:.75rem;color:var(--gold-dim);margin-bottom:8px">' + esc(q) + '</div>';
+      html += '<div class="pr-stats-grid">';
+      html += prStat('Games', qt.games, '', '');
+      html += prStat('Wins', qt.wins, qt.games ? pct(qt.wins/qt.games) : '—', qt.wins > 0 ? 'pr-stat-gold' : '');
+      html += prStat('ITM', qt.itm, qt.games ? pct(qt.itm/qt.games) : '—', '');
+      html += prStat('Points', Math.round(qt.points).toLocaleString(), qt.games ? (qt.points/qt.games).toFixed(1)+' avg' : '', '');
+      html += prStat('ROI', (qt.roi>=0?'+':'')+qt.roi.toLocaleString(), '', qt.roi>=0?'pr-stat-green':'pr-stat-red');
+      html += '</div></div>';
+    });
+    html += '</div>';
+  }
+
+  // ── Game History Table ────────────────────────────────────────
+  html += '<div class="pr-section"><div class="pr-section-title">Game History</div>';
+  html += '<div class="pr-hist-wrap"><table class="pr-hist-table"><thead><tr>';
+  html += '<th>Date</th><th>Quarter</th><th>Game</th><th>Field</th><th>Rank</th><th>Points</th><th>Chips</th><th>Bounty</th>';
+  html += '</tr></thead><tbody>';
+  var histRows = rows.slice().reverse(); // most recent first
+  histRows.forEach(function(r) {
+    var isWin = (r.rank === 1);
+    html += '<tr class="' + (isWin ? 'pr-hist-win' : '') + '">';
+    html += '<td>' + esc(r.date) + '</td>';
+    html += '<td>' + esc(r.quarter) + '</td>';
+    html += '<td>' + (r.game === 'holdem' ? "Hold'em" : 'Omaha') + '</td>';
+    html += '<td>' + (r.np || '?') + '</td>';
+    html += '<td>' + (isWin ? '🏆 1st' : '#' + r.rank) + '</td>';
+    html += '<td>' + Math.round(r.points).toLocaleString() + '</td>';
+    html += '<td>' + (r.chips > 0 ? r.chips.toLocaleString() : '—') + '</td>';
+    html += '<td>' + (r.bounty > 0 ? r.bounty.toLocaleString() : '—') + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table></div></div>';
+
+  area.innerHTML = html;
+}
+
+// ── Helper: get leaderboard ranks for a player in a quarter ───
+function prGetLBRanks(player, q, out) {
+  if (!DATA[q]) return;
+  var qd = DATA[q];
+  if (qd.holdem) {
+    qd.holdem.forEach(function(r) {
+      if (r.player === player) out[q+'|H'] = { q:q, cat:"Hold'em", rank:r.rank, pts:r.points };
+    });
+  }
+  if (qd.omaha) {
+    qd.omaha.forEach(function(r) {
+      if (r.player === player) out[q+'|O'] = { q:q, cat:'Omaha Hi/Lo', rank:r.rank, pts:r.points };
+    });
+  }
+  if (qd.overall) {
+    qd.overall.forEach(function(r) {
+      if (r.player === player) out[q+'|T'] = { q:q, cat:'Overall', rank:r.rank, pts:r.overall_pts };
+    });
+  }
+}
+
+// ── Helper: compute skill percentile vs field ──────────────────
+function prComputeSkill(player, period, rows) {
+  var results = [];
+  if (!STATS) return results;
+
+  // Periods to look at
+  var periods = period === 'Overall' ? Object.keys(STATS) : [period];
+  periods = periods.filter(function(p) { return p !== 'Overall' ? true : false; });
+  // Only use quarters where this player played
+  var playerQtrs = {};
+  rows.forEach(function(r) { playerQtrs[r.quarter] = true; });
+
+  // Aggregate ITM%, win%, avg points across relevant periods
+  var metrics = { itmPct:[], winPct:[], avgPts:[] };
+
+  periods.forEach(function(p) {
+    if (!playerQtrs[p] && period !== 'Overall') return;
+    if (!playerQtrs[p]) return;
+    var arr = STATS[p] || [];
+    var all_itm = [], all_win = [], all_pts = [];
+    var playerStat = null;
+    arr.forEach(function(s) {
+      if (s.t_games < 3) return; // ignore low-game noise
+      all_itm.push(s.t_itmpct !== null ? s.t_itmpct : 0);
+      all_win.push(s.t_winpct !== null ? s.t_winpct : 0);
+      all_pts.push(s.t_avgpts !== null ? s.t_avgpts : 0);
+      if (s.player === player) playerStat = s;
+    });
+    if (!playerStat || all_itm.length < 2) return;
+
+    function percentile(arr2, val) {
+      if (!arr2.length) return 50;
+      var below = arr2.filter(function(v) { return v < val; }).length;
+      return Math.round((below / arr2.length) * 100);
+    }
+
+    metrics.itmPct.push(percentile(all_itm, playerStat.t_itmpct || 0));
+    metrics.winPct.push(percentile(all_win, playerStat.t_winpct || 0));
+    metrics.avgPts.push(percentile(all_pts, playerStat.t_avgpts || 0));
+  });
+
+  function avg(arr2) {
+    return arr2.length ? arr2.reduce(function(s,v){return s+v;},0)/arr2.length : null;
+  }
+
+  var itmAvg = avg(metrics.itmPct);
+  var winAvg = avg(metrics.winPct);
+  var ptsAvg = avg(metrics.avgPts);
+
+  if (itmAvg !== null) results.push({ label:'ITM Rate vs Field', pct:itmAvg, pctText: itmAvg.toFixed(0) + ' percentile' });
+  if (winAvg !== null) results.push({ label:'Win Rate vs Field',  pct:winAvg, pctText: winAvg.toFixed(0) + ' percentile' });
+  if (ptsAvg !== null) results.push({ label:'Avg Points vs Field',pct:ptsAvg, pctText: ptsAvg.toFixed(0) + ' percentile' });
+
+  return results;
+}
+
+// ── Small HTML helpers ──────────────────────────────────────────
+function prStat(label, value, sub, extraClass) {
+  return '<div class="pr-stat-card ' + (extraClass||'') + '">' +
+    '<div class="pr-stat-label">' + esc(label) + '</div>' +
+    '<div class="pr-stat-value">' + value + '</div>' +
+    (sub ? '<div class="pr-stat-sub">' + esc(sub) + '</div>' : '') +
+    '</div>';
+}
+
+function prHvoRow(label, s, isTotal) {
+  var roi = (s.chips || 0) + (s.bounty || 0) - (s.games || 0) * BUY_IN;
+  return '<tr class="' + (isTotal ? 'pr-total' : '') + '">' +
+    '<td>' + esc(label) + '</td>' +
+    '<td>' + (s.games || 0) + '</td>' +
+    '<td>' + (s.wins  || 0) + '</td>' +
+    '<td>' + (s.itm   || 0) + '</td>' +
+    '<td>' + (s.games ? pct((s.itm||0)/s.games) : '—') + '</td>' +
+    '<td>' + Math.round(s.points || 0).toLocaleString() + '</td>' +
+    '<td>' + (s.games ? (s.points/s.games).toFixed(1) : '—') + '</td>' +
+    '<td>' + (s.chips || 0).toLocaleString() + '</td>' +
+    '<td>' + (roi >= 0 ? '+' : '') + roi.toLocaleString() + '</td>' +
+    '</tr>';
 }
 
 // ── START ─────────────────────────────────────────────────────
