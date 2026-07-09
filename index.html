@@ -285,6 +285,12 @@
   body.light .tab-nav { border-bottom-color:#BF9A30; }
   body.light .tab-btn.active { background:rgba(122,85,0,.09); border-color:#7A5500; box-shadow:0 0 14px rgba(122,85,0,.15),inset 0 0 8px rgba(122,85,0,.06); }
 
+  /* Sidebar nav — light mode */
+  body.light .nav-item { color:#1a2a3a; border-color:rgba(40,70,110,.35); background:rgba(0,0,0,.04); }
+  body.light .nav-item:hover { color:#0a1a2a; background:rgba(0,0,0,.08); border-color:rgba(40,70,110,.65); }
+  body.light .nav-item.active { color:#7A5500; border-color:#BF9A30; background:rgba(122,85,0,.09); }
+  body.light .nav-section-label { color:#1a2a3a; }
+
   /* Controls */
   body.light .controls   { background:#FFFFFF; border-bottom-color:#C8D0DC; }
   body.light .best-n-badge { background:#EFF1F4; border-color:#BF9A30; color:#7A5500; }
@@ -454,26 +460,26 @@
   .results-wrap { padding:0 0 48px; max-width:1280px; margin:0 auto; }
   .results-header { text-align:center; padding:32px 24px 24px; background:linear-gradient(180deg,#08090d 0%,var(--bg-card) 100%); border-bottom:2px solid var(--border-gold); position:relative; }
   .results-header::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold-dim),var(--gold),var(--gold-dim),transparent); }
-  .results-hdr-eyebrow { font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.35em; color:var(--gold-dim); margin-bottom:10px; }
+  .results-hdr-eyebrow { font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.35em; color:var(--gold-light); margin-bottom:10px; }
   .results-hdr-title { font-family:'Cinzel',serif; font-size:clamp(1rem,2.8vw,1.7rem); font-weight:900; color:var(--gold); letter-spacing:.12em; text-shadow:0 0 40px rgba(201,168,76,.35),0 2px 4px rgba(0,0,0,.8); }
-  .results-hdr-detail { font-family:'Cinzel',serif; font-size:.78rem; letter-spacing:.2em; color:var(--text-dim); margin-top:8px; }
+  .results-hdr-detail { font-family:'Cinzel',serif; font-size:.78rem; letter-spacing:.2em; color:#c8d8ee; margin-top:8px; }
 
   /* Meta grid */
   .results-meta-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-bottom:1px solid var(--border); background:var(--bg-card); }
   .results-meta-item { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 16px 24px; border-right:1px solid var(--border); }
   .results-meta-item:last-child { border-right:none; }
   .rmi-icon  { font-size:1.8rem; margin-bottom:6px; }
-  .rmi-label { font-family:'Cinzel',serif; font-size:.75rem; font-weight:700; letter-spacing:.22em; color:var(--text-muted); text-transform:uppercase; margin-bottom:4px; }
-  .rmi-value { font-family:'Cinzel',serif; font-size:1.4rem; font-weight:700; color:var(--gold-light); }
-  .rmi-sub   { font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.08em; color:var(--text-dim); margin-top:3px; }
+  .rmi-label { font-family:'Cinzel',serif; font-size:.75rem; font-weight:700; letter-spacing:.22em; color:#8aa8c8; text-transform:uppercase; margin-bottom:4px; }
+  .rmi-value { font-family:'Cinzel',serif; font-size:1.4rem; font-weight:700; color:#f0d880; }
+  .rmi-sub   { font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.08em; color:#b8cce0; margin-top:3px; }
 
   /* Prize bar */
-  .results-prize-bar { background:rgba(201,168,76,.06); border-bottom:1px solid var(--border-gold); padding:12px 22px; font-size:.82rem; color:var(--text-dim); display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
-  .results-prize-bar strong { color:var(--gold-light); }
+  .results-prize-bar { background:rgba(201,168,76,.06); border-bottom:1px solid var(--border-gold); padding:12px 22px; font-size:.82rem; color:#b8cce0; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .results-prize-bar strong { color:#f0d880; }
   .results-prize-sep { color:var(--border-gold); margin:0 4px; }
 
   /* Section title */
-  .results-section-title { font-family:'Cinzel',serif; font-size:.72rem; font-weight:700; letter-spacing:.3em; color:var(--gold-dim); text-transform:uppercase; text-align:center; padding:20px 0 14px; }
+  .results-section-title { font-family:'Cinzel',serif; font-size:.72rem; font-weight:700; letter-spacing:.3em; color:var(--gold-light); text-transform:uppercase; text-align:center; padding:20px 0 14px; }
 
   /* Podium wrapper */
   .results-podium-wrap { background:var(--bg-panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:0 40px 40px; }
@@ -664,37 +670,43 @@
   /* ── SIDEBAR LAYOUT ─────────────────────────────────────────── */
   .app-layout { display:flex; min-height:0; }
   .sidebar {
-    width:234px; flex-shrink:0;
-    background:var(--bg-card); border-right:1px solid var(--border);
-    padding:12px 0; display:flex; flex-direction:column; gap:2px;
+    width:256px; flex-shrink:0;
+    background:transparent; border-right:none;
+    padding:14px 10px; display:flex; flex-direction:column; gap:5px;
     position:sticky; top:0; align-self:flex-start;
     max-height:calc(100vh - 90px); overflow-y:auto;
   }
   .nav-item {
     display:flex; align-items:center; gap:8px;
-    padding:10px 16px; font-family:'Cinzel',serif; font-size:.73rem; letter-spacing:.05em;
-    color:var(--text-dim); cursor:pointer; border:none; background:none;
-    width:100%; text-align:left; transition:background .15s, color .15s;
-    border-left:3px solid transparent; line-height:1.3;
+    padding:10px 18px; font-family:'Cinzel',serif; font-size:.68rem; letter-spacing:.06em;
+    color:#b8cce0; cursor:pointer;
+    border:1px solid rgba(150,170,200,.35); border-radius:50px;
+    background:rgba(255,255,255,.04);
+    width:100%; text-align:left; transition:all .18s; line-height:1.3;
   }
-  .nav-item:hover { background:var(--bg-panel); color:var(--text-main); }
-  .nav-item.active { background:var(--bg-panel); color:var(--gold); border-left-color:var(--gold); font-weight:700; }
-  .nav-divider { height:1px; background:var(--border); margin:6px 12px; }
+  .nav-item:hover { background:rgba(255,255,255,.09); color:#ddeeff; border-color:rgba(180,210,240,.65); }
+  .nav-item.active { background:rgba(201,168,76,.12); color:var(--gold); border-color:var(--gold-dim); font-weight:700; }
+  .nav-divider { display:none; }
+  .nav-section-label {
+    font-family:'Cinzel',serif; font-size:1rem; letter-spacing:.2em;
+    color:#d8e8f8; font-weight:700; text-transform:uppercase;
+    padding:12px 8px 4px; text-align:center;
+  }
+  .nav-link { text-decoration:none; }
   .main-content { flex:1; min-width:0; overflow:hidden; padding:0 14px; }
 
   @media (max-width:700px) {
     .app-layout { flex-direction:column; }
     .sidebar {
       width:100%; flex-direction:row; flex-wrap:wrap; max-height:none;
-      position:relative; padding:6px 4px; gap:3px;
-      border-right:none; border-bottom:1px solid var(--border);
+      position:relative; padding:6px 6px; gap:4px;
+      border-bottom:1px solid var(--border);
     }
     .nav-item {
-      width:auto; flex:0 0 auto; padding:6px 9px; font-size:.68rem;
-      border-left:none; border-bottom:3px solid transparent;
+      width:auto; flex:0 0 auto; padding:6px 14px; font-size:.78rem;
     }
-    .nav-item.active { border-left-color:transparent; border-bottom-color:var(--gold); }
-    .nav-divider { display:none; }
+    .nav-item.active { border-color:var(--gold); }
+    .nav-section-label { width:100%; padding:6px 4px 2px; font-size:.78rem; text-align:left; }
     .main-content { padding:0 6px; }
   }
 
@@ -864,6 +876,15 @@
   <button class="nav-item"        id="nav-champions"   onclick="switchTab('champions')">♛ CHAMPIONS</button>
   <div class="nav-divider"></div>
   <button class="nav-item" id="nav-playerreport" onclick="switchTab('playerreport')">🃏 PLAYER REPORT</button>
+  <div class="nav-divider"></div>
+  <div class="nav-section-label">OTHER LEAGUES</div>
+  <a class="nav-item nav-link" href="https://rainsplace.github.io/OBLB/" target="_blank" rel="noopener">⭐ Orion's Belt</a>
+  <a class="nav-item nav-link" href="https://rainsplace.github.io/MGWebApp/" target="_blank" rel="noopener">🌙 Midnight Grind Team</a>
+  <a class="nav-item nav-link" href="https://mnorrismarshall-web.github.io/Wildhorses/" target="_blank" rel="noopener">🍃 Weedwoman420's Wildhorses</a>
+  <a class="nav-item nav-link" href="https://rainsplace.github.io/EBApp/" target="_blank" rel="noopener">🐦 Early Bird Team</a>
+  <div class="nav-divider"></div>
+  <a class="nav-item nav-link" href="https://rainsplace.github.io/Avatars/" target="_blank" rel="noopener">🖼 League Avatar Vault</a>
+  <a class="nav-item nav-link" href="https://rainsplace.github.io/EverythingInOnePlace/" target="_blank" rel="noopener">🌐 Everything in One Place</a>
 </nav>
 <div class="main-content">
 
