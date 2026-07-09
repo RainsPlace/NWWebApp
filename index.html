@@ -1527,7 +1527,7 @@ function buildPodium(elId, rows, type) {
     var sub = type==='overall' ? 'H:'+n(p.holdem_pts)+' O:'+n(p.omaha_pts) : p.games+' games';
     return '<div class="pp">'+
       '<div class="pp-crown">'+crown+'</div>'+
-      '<div class="pp-avatar">'+(p.player||'?').charAt(0).toUpperCase()+'</div>'+
+      '<div class="pp-avatar">'+((p.player||'').replace(/^_+/,'')||'?').charAt(0).toUpperCase()+'</div>'+
       '<div class="pp-name">'+p.player+'</div>'+
       '<div class="pp-pts">'+pts+'</div>'+
       '<div class="pp-sub">'+sub+'</div>'+
@@ -1854,7 +1854,7 @@ function renderLatestGame() {
       var ptsSub  = n(p.points) + ' pts';
       html += '<div class="pp">' +
         '<div class="pp-crown">' + crown + '</div>' +
-        '<div class="pp-avatar">' + (p.player || '?').charAt(0).toUpperCase() + '</div>' +
+        '<div class="pp-avatar">' + (((p.player||'').replace(/^_+/,'')||'?').charAt(0).toUpperCase()) + '</div>' +
         '<div class="pp-name">' + esc(p.player) + '</div>' +
         '<div class="pp-pts">' + chipStr + '</div>' +
         '<div class="pp-sub">' + ptsSub + '</div>' +
@@ -2322,7 +2322,7 @@ var AVATAR_MAP = {
 
 function champAvatar(player, imgClass, phClass) {
   var file = AVATAR_MAP[player];
-  if (!file) return '<div class="' + phClass + '">' + esc((player || '?').charAt(0).toUpperCase()) + '</div>';
+  if (!file) return '<div class="' + phClass + '">' + esc(((player||'').replace(/^_+/,'')||'?').charAt(0).toUpperCase()) + '</div>';
   return '<img class="' + imgClass + '" src="' + AVATAR_BASE + file + '" alt="' + esc(player) + '">';
 }
 
