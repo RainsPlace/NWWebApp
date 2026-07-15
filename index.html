@@ -860,6 +860,7 @@
     <button class="refresh-btn" id="refreshBtn"><span class="ri">↻</span> REFRESH</button>
     <button class="theme-btn"  id="themeBtn"  onclick="toggleTheme()">CHANGE TO LIGHT THEME</button>
     <button class="theme-btn"  id="copyBtn"   onclick="captureTab()">📷 COPY TO CLIPBOARD</button>
+    <button class="theme-btn" id="copyBtn2" onclick="captureTab2()" style="display:none">📷 COPY BOUNTIES</button>
     <div class="updated-time" id="updatedTime"></div>
     <div class="countdown" id="countdownEl"></div>
   </div>
@@ -1497,6 +1498,15 @@ function switchTab(tab) {
   if (tab === 'calendar')     renderCalTab();
   if (tab === 'results')      renderLatestGame();
   if (tab === 'gamereview')   { if (!reviewLoaded) loadReview(); }
+  var cb  = document.getElementById('copyBtn');
+  var cb2 = document.getElementById('copyBtn2');
+  if (tab === 'gamereview') {
+    if (cb)  cb.textContent  = '📷 COPY CHIPS';
+    if (cb2) cb2.style.display = '';
+  } else {
+    if (cb)  cb.textContent  = '📷 COPY TO CLIPBOARD';
+    if (cb2) cb2.style.display = 'none';
+  }
   if (tab === 'champions')    { if (!championsLoaded) loadChampions(); else renderChampions(CHAMPIONS_DATA); }
   if (tab === 'playerreport') { if (!PR_PLAYERS_LOADED) loadPlayerList(); }
 }
@@ -2019,49 +2029,43 @@ function renderReview(data) {
   var qParts    = (data.quarter || '').split(' ');
   var prizePool = data.fieldSize * BUY_IN;
 
-  var html = '<div class="rv-wrap">';
+  var hdr = '<div id="rv-header-block">' +
+    '<div class="results-header">' +
+      '<div class="results-hdr-eyebrow">⚔ NORDIC WARRIORS POKER LEAGUE ⚔</div>' +
+      '<div class="results-hdr-title">' + gameIcon + ' ' + esc(data.gameLabel.toUpperCase()) + ' ' + gameIcon + '</div>' +
+      '<div class="results-hdr-detail">' + dateLong + ' &nbsp;·&nbsp; ' + esc(data.quarter) + '</div>' +
+    '</div>' +
+    '<div class="results-meta-grid">' +
+      rmi('📅', 'DATE',     dateShort, String(dateYear)) +
+      rmi(gameIcon, 'GAME', isHoldem ? "NL Hold'em" : 'Omaha', isHoldem ? '' : 'Hi/Lo') +
+      rmi('👥', 'ENTRANTS', data.fieldSize, 'Players') +
+      rmi('📊', 'QUARTER',  qParts[0] || data.quarter, qParts[1] || '') +
+    '</div>' +
+    '<div class="results-prize-bar">' +
+      '💰 Prize Pool: <strong>' + prizePool.toLocaleString() + '</strong> chips' +
+      ' (' + data.fieldSize + ' &times; ' + BUY_IN.toLocaleString() + ')' +
+      '<span class="results-prize-sep">|</span>' +
+      '💵 <strong>' + data.itmCount + '</strong> player' + (data.itmCount !== 1 ? 's' : '') + ' in the money' +
+    '</div>';
+  if (data.updated) { hdr += '<div class="rv-updated">Review generated: ' + (new Date(data.updated)).toLocaleString() + '</div>'; }
+  hdr += '</div>';
 
-  // Header banner (reuse results-header style)
-  html += '<div class="results-header">' +
-    '<div class="results-hdr-eyebrow">⚔ NORDIC WARRIORS POKER LEAGUE ⚔</div>' +
-    '<div class="results-hdr-title">' + gameIcon + ' ' + esc(data.gameLabel.toUpperCase()) + ' ' + gameIcon + '</div>' +
-    '<div class="results-hdr-detail">' + dateLong + ' &nbsp;·&nbsp; ' + esc(data.quarter) + '</div>' +
-  '</div>';
-
-  // Meta grid (reuse results-meta-grid style)
-  html += '<div class="results-meta-grid">' +
-    rmi('📅', 'DATE',     dateShort, String(dateYear)) +
-    rmi(gameIcon, 'GAME', isHoldem ? "NL Hold'em" : 'Omaha', isHoldem ? '' : 'Hi/Lo') +
-    rmi('👥', 'ENTRANTS', data.fieldSize, 'Players') +
-    rmi('📊', 'QUARTER',  qParts[0] || data.quarter, qParts[1] || '') +
-  '</div>';
-
-  // Prize bar (reuse results-prize-bar style)
-  html += '<div class="results-prize-bar">' +
-    '💰 Prize Pool: <strong>' + prizePool.toLocaleString() + '</strong> chips' +
-    ' (' + data.fieldSize + ' &times; ' + BUY_IN.toLocaleString() + ')' +
-    '<span class="results-prize-sep">|</span>' +
-    '💵 <strong>' + data.itmCount + '</strong> player' + (data.itmCount !== 1 ? 's' : '') + ' in the money' +
-  '</div>';
-
-  if (data.updated) {
-    var upd = new Date(data.updated);
-    html += '<div class="rv-updated">Review generated: ' + upd.toLocaleString() + '</div>';
-  }
-
-  // ITM / Podium section
+  var itmHtml = '';
   if (data.itm && data.itm.length) {
-    html += '<div class="rv-section-hdr">🏆 &nbsp;PODIUM FINISHERS — IN THE MONEY</div>';
-    data.itm.forEach(function(p) { html += renderReviewCard(p, false, 0, data.quarter); });
+    itmHtml += '<div class="rv-section-hdr">🏆 &nbsp;PODIUM FINISHERS — IN THE MONEY</div>';
+    data.itm.forEach(function(p) { itmHtml += renderReviewCard(p, false, 0, data.quarter); });
   }
 
-  // Bounty section
+  var btyHtml = '';
   if (data.bountyTop && data.bountyTop.length) {
-    html += '<div class="rv-section-hdr">💣 &nbsp;TOP BOUNTY HUNTERS</div>';
-    data.bountyTop.forEach(function(p, idx) { html += renderReviewCard(p, true, idx, data.quarter); });
+    btyHtml += '<div class="rv-section-hdr">💣 &nbsp;TOP BOUNTY HUNTERS</div>';
+    data.bountyTop.forEach(function(p, idx) { btyHtml += renderReviewCard(p, true, idx, data.quarter); });
   }
 
-  html += '</div>';
+  var html = '<div class="rv-wrap">' + hdr +
+    '<div id="rv-itm-block">'    + itmHtml + '</div>' +
+    '<div id="rv-bounty-block">' + btyHtml + '</div>' +
+    '</div>';
   el.innerHTML = html;
 }
 
@@ -2471,21 +2475,89 @@ function renderChampions(data) {
   el.innerHTML = html;
 }
 
-// ── COPY TO CLIPBOARD (image) ─────────────────────────────────
+// ── COPY TO CLIPBOARD (image) ─────────────────────────────
+
+function captureReviewSection(hideBlockId, btnEl) {
+  var contentEl = document.getElementById('gamereview-content');
+  var hideEl    = document.getElementById(hideBlockId);
+  if (!contentEl || !contentEl.innerHTML.trim()) {
+    alert('Review not loaded yet.'); return;
+  }
+  if (btnEl) { btnEl.textContent = '\u23F3 CAPTURING\u2026'; btnEl.disabled = true; }
+
+  var origHide = hideEl ? hideEl.style.display : '';
+  if (hideEl) hideEl.style.display = 'none';
+
+  function restore() {
+    if (hideEl) hideEl.style.display = origHide;
+  }
+
+  var SANS = "'Segoe UI', Arial, Helvetica, sans-serif";
+  setTimeout(function() {
+    var naturalW    = Math.max(contentEl.offsetWidth, 1);
+    var captureScale = 690 / naturalW;
+    html2canvas(contentEl, {
+      backgroundColor: document.body.classList.contains('light') ? '#f4f1eb' : '#0d0f14',
+      scale: captureScale,
+      useCORS: true, logging: false,
+      onclone: function(clonedDoc) {
+        clonedDoc.body.style.fontFamily = SANS;
+        var els = clonedDoc.querySelectorAll(
+          '.rv-narrative, .rv-stat-label, .rv-stat-val, .rv-player-name, ' +
+          '.rv-rating-label, .results-hdr-detail, .rmi-label, .rmi-value, ' +
+          '.rmi-sub, .results-section-title'
+        );
+        for (var i = 0; i < els.length; i++) {
+          els[i].style.fontFamily = SANS;
+          els[i].style.fontStyle  = 'normal';
+        }
+      }
+    })
+      .then(function(canvas) {
+        restore();
+        return new Promise(function(resolve, reject) {
+          canvas.toBlob(function(blob) {
+            if (!blob) { reject(new Error('Canvas to blob failed')); return; }
+            navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
+              .then(resolve).catch(reject);
+          }, 'image/png');
+        });
+      })
+      .then(function() {
+        if (btnEl) {
+          var orig = btnEl.id === 'copyBtn' ? '📷 COPY CHIPS' : '📷 COPY BOUNTIES';
+          btnEl.textContent = '\u2713 COPIED!';
+          setTimeout(function() { btnEl.textContent = orig; btnEl.disabled = false; }, 2000);
+        }
+      })
+      .catch(function(err) {
+        restore();
+        console.error('captureReviewSection:', err);
+        if (btnEl) {
+          var orig = btnEl.id === 'copyBtn' ? '📷 COPY CHIPS' : '📷 COPY BOUNTIES';
+          btnEl.textContent = '\u26A0 FAILED';
+          setTimeout(function() { btnEl.textContent = orig; btnEl.disabled = false; }, 2000);
+        }
+        alert('Copy failed: ' + err.message + '\nTry a different browser or check clipboard permissions.');
+      });
+  }, 80);
+}
+
 function captureTab() {
+  if (activeTab === 'gamereview') {
+    captureReviewSection('rv-bounty-block', document.getElementById('copyBtn'));
+    return;
+  }
   var sectionId = 'section-' + activeTab;
   var el = document.getElementById(sectionId);
   if (!el) { alert('Nothing to capture.'); return; }
   var btn = document.getElementById('copyBtn');
   if (btn) { btn.textContent = '\u23F3 CAPTURING\u2026'; btn.disabled = true; }
-  // Target ~1300px wide image so forum posts at a consistent, readable size.
   var captureScale = Math.min(2, Math.max(1, 1300 / Math.max(el.offsetWidth, 1)));
   html2canvas(el, {
     backgroundColor: document.body.classList.contains('light') ? '#f4f1eb' : '#0d0f14',
     scale: captureScale, useCORS: true, logging: false,
     onclone: function(clonedDoc) {
-      // Swap decorative serif/italic fonts for clean sans-serif — much more
-      // legible at forum image sizes where text renders small.
       var SANS = "'Segoe UI', Arial, Helvetica, sans-serif";
       clonedDoc.body.style.fontFamily = SANS;
       var els = clonedDoc.querySelectorAll(
@@ -2500,19 +2572,32 @@ function captureTab() {
     }
   })
     .then(function(canvas) {
-      return canvas.toBlob(function(blob) {
-        if (!blob) throw new Error('Canvas to blob failed');
-        return navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
-      }, 'image/png');
+      return new Promise(function(resolve, reject) {
+        canvas.toBlob(function(blob) {
+          if (!blob) { reject(new Error('Canvas to blob failed')); return; }
+          navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
+            .then(resolve).catch(reject);
+        }, 'image/png');
+      });
     })
     .then(function() {
-      if (btn) { btn.textContent = '\u2713 COPIED!'; setTimeout(function(){ btn.textContent = '\uD83D\uDCF7 COPY TO CLIPBOARD'; btn.disabled = false; }, 2000); }
+      if (btn) {
+        btn.textContent = '\u2713 COPIED!';
+        setTimeout(function() { btn.textContent = '📷 COPY TO CLIPBOARD'; btn.disabled = false; }, 2000);
+      }
     })
     .catch(function(err) {
-      console.error('captureTab error:', err);
-      if (btn) { btn.textContent = '\u26A0 FAILED'; setTimeout(function(){ btn.textContent = '\uD83D\uDCF7 COPY TO CLIPBOARD'; btn.disabled = false; }, 2000); }
+      console.error('captureTab:', err);
+      if (btn) {
+        btn.textContent = '\u26A0 FAILED';
+        setTimeout(function() { btn.textContent = '📷 COPY TO CLIPBOARD'; btn.disabled = false; }, 2000);
+      }
       alert('Copy failed: ' + err.message + '\nTry a different browser or check clipboard permissions.');
     });
+}
+
+function captureTab2() {
+  captureReviewSection('rv-itm-block', document.getElementById('copyBtn2'));
 }
 
 // ── THEME TOGGLE ─────────────────────────────────────────────
