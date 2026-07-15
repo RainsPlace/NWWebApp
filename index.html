@@ -2478,9 +2478,26 @@ function captureTab() {
   if (!el) { alert('Nothing to capture.'); return; }
   var btn = document.getElementById('copyBtn');
   if (btn) { btn.textContent = '\u23F3 CAPTURING\u2026'; btn.disabled = true; }
+  // Target ~1300px wide image so forum posts at a consistent, readable size.
+  var captureScale = Math.min(2, Math.max(1, 1300 / Math.max(el.offsetWidth, 1)));
   html2canvas(el, {
     backgroundColor: document.body.classList.contains('light') ? '#f4f1eb' : '#0d0f14',
-    scale: 2, useCORS: true, logging: false
+    scale: captureScale, useCORS: true, logging: false,
+    onclone: function(clonedDoc) {
+      // Swap decorative serif/italic fonts for clean sans-serif — much more
+      // legible at forum image sizes where text renders small.
+      var SANS = "'Segoe UI', Arial, Helvetica, sans-serif";
+      clonedDoc.body.style.fontFamily = SANS;
+      var els = clonedDoc.querySelectorAll(
+        '.rv-narrative, .rv-stat-label, .rv-stat-val, .rv-player-name, ' +
+        '.rv-rating-label, .results-hdr-detail, .rmi-label, .rmi-value, ' +
+        '.rmi-sub, .results-section-title'
+      );
+      for (var i = 0; i < els.length; i++) {
+        els[i].style.fontFamily = SANS;
+        els[i].style.fontStyle  = 'normal';
+      }
+    }
   })
     .then(function(canvas) {
       return canvas.toBlob(function(blob) {
