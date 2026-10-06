@@ -1530,10 +1530,13 @@ function rLabel(rank){ return rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':ra
 // ── LOAD (cache-first) ────────────────────────────────────────
 function loadData(force) {
   if (force) {
-    // Clear review cache so it re-fetches on next tab visit
-    try { localStorage.removeItem(LS_REVIEW); localStorage.removeItem(LS_REVIEW_GEN); } catch(e) {}
-    REVIEW_DATA  = null;
-    reviewLoaded = false;
+    // Clear review and champions caches so they re-fetch on next tab visit
+    try { localStorage.removeItem(LS_REVIEW);    localStorage.removeItem(LS_REVIEW_GEN);    } catch(e) {}
+    try { localStorage.removeItem(LS_CHAMPIONS); localStorage.removeItem(LS_CHAMP_GEN);     } catch(e) {}
+    REVIEW_DATA    = null;
+    reviewLoaded   = false;
+    CHAMPIONS_DATA = null;
+    championsLoaded = false;
     fetchFresh(false);
     return;
   }
@@ -3513,11 +3516,19 @@ function prHvoRow(label, s, isTotal) {
 })();
 
 loadData();
+
+(function(){
+  fetch(WEBAPP_URL + '?get=pageview')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var el = document.getElementById('nwPvCount');
+      if (el && d && d.count) el.textContent = Number(d.count).toLocaleString();
+    })
+    .catch(function(){});
+})();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<div style="text-align:center; margin-top:30px; padding-bottom:30px;">
-  <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Frainsplace.github.io%2FNWWebApp%2F&label=Visits&icon=cloud-drizzle&color=%23198754&message=&style=flat&tz=US%2FEastern" alt="App Visits">
-</div>
+<div id="nw-page-footer" style="text-align:center;padding:8px 0 12px;font-size:11px;color:#5891ad;opacity:0.8">👁 PAGE VIEWS: <span id="nwPvCount">—</span></div>
 </body>
 </html>
 
